@@ -31,6 +31,30 @@ export class RegistrationComponent {
   })
 
   constructor(private validation: ValidationService) {
+    this.getEmail();
   }
 
+  /**
+   * Gets the email from localstorage and if there is an email it sets it to this.email value
+   * */
+  getEmail(): void {
+    const email: string | null = localStorage.getItem('email');
+    if(email) {
+      this.email.setValue(JSON.parse(email));
+    }
+  }
+
+  /**
+   * Gives back an errormessage or null
+   *
+   * @returns {string | undefined}
+   * */
+  getErrorMessageEmail(): string | undefined {
+    if (this.email.hasError('check')) {
+      return 'Bitte geben Sie eine gültige Email-Adresse ein';
+    }
+    return;
+  }
+
+  protected readonly localStorage = localStorage;
 }

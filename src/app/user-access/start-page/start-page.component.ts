@@ -50,6 +50,7 @@ export class StartPageComponent{
   toRegister(event: Event): void {
     event.preventDefault();
     if(this.email.valid) {
+      localStorage.setItem('email', JSON.stringify(this.email.value))
       this.router.navigate(['/registration/']);
       return;
     }

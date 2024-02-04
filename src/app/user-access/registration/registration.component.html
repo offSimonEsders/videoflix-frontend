@@ -7,7 +7,7 @@
         <input autocomplete="email" [ngClass]="email.valid ? 'valid' : ''" type="text" id="email" [formControl]="email" #emailinput required>
         <label for="email">E-Mail-Adresse</label>
         @if(email.invalid) {
-          <p *ngIf="emailinput.value.length > 0" class="error-message"></p>
+          <p *ngIf="emailinput.value.length > 0" class="error-message">{{getErrorMessageEmail()}}</p>
         }
       </div>
       <div class="standart-inputcon">
