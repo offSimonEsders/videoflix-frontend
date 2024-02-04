@@ -33,6 +33,12 @@
   align-items: center;
   gap: 16px;
 
+  .error-message {
+    position: static;
+    margin-top: 4px;
+    transform: translate(0%);
+  }
+
   button {
     width: 100%;
     height: 40px;

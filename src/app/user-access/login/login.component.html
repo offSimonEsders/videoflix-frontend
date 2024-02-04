@@ -3,12 +3,18 @@
   <div class="login-content">
     <form action="" class="login-form">
       <div class="standart-inputcon">
-        <input type="text" id="email" required>
+        <input type="text" id="email" [formControl]="email" #emailinput required>
         <label for="email">E-Mail-Adresse</label>
+        @if(email.invalid) {
+          <p *ngIf="emailinput.value.length > 0" class="error-message">{{getErrorMessageEmail()}}</p>
+        }
       </div>
       <div class="standart-inputcon">
-        <input type="text" id="password" required>
+        <input type="password" id="password" [formControl]="password" #passwordinput required>
         <label for="password">Passwort</label>
+        @if(password.invalid) {
+          <p *ngIf="passwordinput.value.length > 0" class="error-message">{{getErrorMessagePassword()}}</p>
+        }
       </div>
       <button class="standart-btn" type="submit">Einloggen</button>
       <a href="">Password vergessen?</a>

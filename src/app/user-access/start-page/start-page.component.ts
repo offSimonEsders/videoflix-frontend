@@ -47,11 +47,11 @@ export class StartPageComponent{
    *
    * @returns {string | undefined} - error message or no errormessage
    * */
-  getErrorMessagePassword(): 'Enter a valid email' | undefined {
+  getErrorMessageEmail(): string | undefined {
     if (this.email.hasError('check')) {
-      return 'Enter a valid email';
+      return 'Bitte geben Sie eine gültige Email-Adresse ein';
     }
-    return
+    return;
   }
 
   /**

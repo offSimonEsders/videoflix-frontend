@@ -16,7 +16,7 @@
             <input [ngClass]="email.invalid ? '' : 'valid'" autocomplete="email" type="text" id="emailinput" [formControl]="email" #emailinput required>
             <label for="emailinput">E-Mail-Adresse</label>
             @if(email.invalid) {
-              <p *ngIf="emailinput.value.length > 0" class="error-message">{{getErrorMessagePassword()}}</p>
+              <p *ngIf="emailinput.value.length > 0" class="error-message">{{getErrorMessageEmail()}}</p>
             }
           </div>
           <button class="standart-btn btn-big" (click)="toRegister($event)">
