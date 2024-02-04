@@ -33,6 +33,7 @@ export class LoginComponent {
    * */
   toggleRemember(): void {
     this.remember = !this.remember;
+    this.setRememberme(this.remember)
   }
 
   /**
@@ -42,8 +43,8 @@ export class LoginComponent {
    *
    * @returns {{check:true} | null} - to validate the errormessage
    * */
-  validateEmail(controls: AbstractControl): {check: true} | null {
-    if(!this.mailregex.test(controls.value)) {
+  validateEmail(controls: AbstractControl): { check: true } | null {
+    if (!this.mailregex.test(controls.value)) {
       return {check: true};
     }
     return null;
@@ -55,7 +56,7 @@ export class LoginComponent {
    * @returns {string | undefined}
    * */
   getErrorMessageEmail() {
-    if(this.email.hasError('check')) {
+    if (this.email.hasError('check')) {
       return 'Bitte geben Sie eine gültige Email-Adresse ein';
     }
     return;
@@ -67,7 +68,7 @@ export class LoginComponent {
    * @returns {string | undefined}
    * */
   getErrorMessagePassword() {
-    if(this.password.hasError('minlength')) {
+    if (this.password.hasError('minlength')) {
       return 'Das Passwort sollte mindestens 8 Zeichen fassen';
     }
     return;
@@ -79,11 +80,34 @@ export class LoginComponent {
    * @param {boolean} toValidate - to show userfeedback after failed login
    * */
   formUserFeedback(toValidate: undefined | boolean = undefined): void {
-    if(this.loginGroup.invalid || toValidate) {
+    if (this.loginGroup.invalid || toValidate) {
       this.loginform?.nativeElement.classList.add('form-not-valid');
       return;
     }
     this.loginform?.nativeElement.classList.remove('form-not-valid');
+  }
+
+  /**
+   * Sets localstorage rememberme to value
+   *
+   * @param {boolean} value - boolean value localstorage is set to
+   * */
+  setRememberme(value: boolean): void {
+    localStorage.setItem('rememberme', JSON.stringify(value));
+  }
+
+  /**
+   * Gets rememberme from localstorage and sets remember to the value
+   *
+   * @returns {boolean} - returns the value from rememberme
+   * */
+  getRememberme(): boolean {
+    const item: string | null = localStorage.getItem('rememberme');
+    if (item) {
+      this.remember = JSON.parse(item)
+      return JSON.parse(item);
+    }
+    return false;
   }
 
 }

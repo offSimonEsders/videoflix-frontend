@@ -4,14 +4,14 @@
     <h1>Einloggen</h1>
     <form [formGroup]="loginGroup" action="" class="login-form" #loginform>
       <div class="standart-inputcon">
-        <input [ngClass]="email.valid ? 'valid' : ''" type="text" id="email" [formControl]="email" #emailinput required>
+        <input autocomplete="email" [ngClass]="email.valid ? 'valid' : ''" type="text" id="email" [formControl]="email" #emailinput required>
         <label for="email">E-Mail-Adresse</label>
         @if(email.invalid) {
           <p *ngIf="emailinput.value.length > 0" class="error-message">{{getErrorMessageEmail()}}</p>
         }
       </div>
       <div class="standart-inputcon">
-        <input [ngClass]="password.valid ? 'valid' : ''" type="password" id="password" [formControl]="password" #passwordinput required>
+        <input autocomplete="password" [ngClass]="password.valid ? 'valid' : ''" type="password" id="password" [formControl]="password" #passwordinput required>
         <label for="password">Passwort</label>
         @if(password.invalid) {
           <p *ngIf="passwordinput.value.length > 0" class="error-message">{{getErrorMessagePassword()}}</p>
@@ -21,7 +21,7 @@
       <a href="">Password vergessen?</a>
     </form>
     <div class="remember-container">
-      <input style="display: none" type="checkbox" name="remember" id="remember" (change)="toggleRemember()" #remembermecheckbox>
+      <input style="display: none" type="checkbox" name="remember" id="remember" (change)="toggleRemember()" [checked]="getRememberme()" #remembermecheckbox>
       <label for="remember">
         <svg *ngIf="!remember" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960"
              width="24">
