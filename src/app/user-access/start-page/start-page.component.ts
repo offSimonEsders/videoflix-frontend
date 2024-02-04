@@ -2,12 +2,13 @@ import {Component, ElementRef, ViewChild} from '@angular/core';
 import {
   ReactiveFormsModule,
   FormControl,
-  AbstractControl,
+  AbstractControl, Validators,
 } from "@angular/forms";
 import {NgClass, NgIf} from "@angular/common";
 import {Router} from "@angular/router";
 import {FooterComponent} from "../footer/footer.component";
 import {HeaderComponent} from "../header/header.component";
+import {ValidationService} from "../../services/validation.service";
 
 @Component({
   selector: 'app-start-page',
@@ -25,21 +26,9 @@ import {HeaderComponent} from "../header/header.component";
 export class StartPageComponent{
   @ViewChild('emailinput') emailinput?: ElementRef<HTMLInputElement>;
   mailregex: RegExp = /[a-z0-9]+@[a-z]+\.[a-z]/;
-  email: FormControl<string | null> = new FormControl('', [this.validateEmail.bind(this)]);
+  email: FormControl<string | null> = new FormControl('', [this.validation.validateEmail.bind(this), Validators.required]);
 
-  constructor(private router: Router) {
-  }
-
-  /**
-   * Validates if email matches to mailregex
-   *
-   * @param {FormControl} control - Field to validate
-   * */
-  validateEmail(control: AbstractControl): { check: true } | null {
-    if (!this.mailregex.test(control.value)) {
-      return {check: true};
-    }
-    return null;
+  constructor(private router: Router, private validation: ValidationService) {
   }
 
   /**

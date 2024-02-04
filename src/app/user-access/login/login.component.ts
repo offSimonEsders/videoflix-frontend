@@ -1,8 +1,9 @@
-import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {FooterComponent} from "../footer/footer.component";
 import {HeaderComponent} from "../header/header.component";
 import {CommonModule} from "@angular/common";
-import {AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {ValidationService} from "../../services/validation.service";
 
 @Component({
   selector: 'app-login',
@@ -18,9 +19,8 @@ import {AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators
 })
 export class LoginComponent {
   @ViewChild('loginform') loginform?: ElementRef;
-  mailregex: RegExp = /[a-z0-9]+@[a-z]+\.[a-z]/;
   remember: boolean = false;
-  email: FormControl<string | null> = new FormControl('', [this.validateEmail.bind(this), Validators.required]);
+  email: FormControl<string | null> = new FormControl('', [this.validation.validateEmail.bind(this), Validators.required]);
   password: FormControl<string | null> = new FormControl('', [Validators.minLength(8), Validators.required]);
 
   loginGroup = new FormGroup({
@@ -28,26 +28,15 @@ export class LoginComponent {
     password: this.password
   });
 
+  constructor(private validation: ValidationService) {
+  }
+
   /**
    * Toggles remember
    * */
   toggleRemember(): void {
     this.remember = !this.remember;
     this.setRememberme(this.remember)
-  }
-
-  /**
-   * Validates the given Formcontrol
-   *
-   * @param {AbstractControl} controls - Element to control
-   *
-   * @returns {{check:true} | null} - to validate the errormessage
-   * */
-  validateEmail(controls: AbstractControl): { check: true } | null {
-    if (!this.mailregex.test(controls.value)) {
-      return {check: true};
-    }
-    return null;
   }
 
   /**

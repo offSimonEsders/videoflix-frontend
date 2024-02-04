@@ -1,0 +1,31 @@
+<section class="registration-frame">
+  <app-header></app-header>
+  <div class="registration-content">
+    <h1>Registrieren</h1>
+    <form action="" class="registration-form">
+      <div class="standart-inputcon">
+        <input autocomplete="email" [ngClass]="email.valid ? 'valid' : ''" type="text" id="email" [formControl]="email" #emailinput required>
+        <label for="email">E-Mail-Adresse</label>
+        @if(email.invalid) {
+          <p *ngIf="emailinput.value.length > 0" class="error-message"></p>
+        }
+      </div>
+      <div class="standart-inputcon">
+        <input autocomplete="password" [ngClass]="password1.valid ? 'valid' : ''" type="password" id="password" [formControl]="password1" #passwordinput required>
+        <label for="password">Passwort</label>
+        @if(password1.invalid) {
+          <p *ngIf="passwordinput.value.length > 0" class="error-message"></p>
+        }
+      </div>
+      <div class="standart-inputcon">
+        <input autocomplete="password" [ngClass]="password2.valid ? 'valid' : ''" type="password" id="password2" [formControl]="password2" #passwordinput required>
+        <label for="password">Passwort</label>
+        @if(password2.invalid) {
+          <p *ngIf="passwordinput.value.length > 0" class="error-message"></p>
+        }
+      </div>
+      <button class="standart-btn">Registrieren</button>
+    </form>
+  </div>
+  <app-footer class="footer"></app-footer>
+</section>
