@@ -56,5 +56,13 @@ export class RegistrationComponent {
     return;
   }
 
+  getErrorMessagePassword(): string | void {
+    if(this.password2.hasError('check')) {
+      return 'Passwörter müssen übereinstimmen'
+    } else if (this.password2.hasError('minlength')) {
+      return 'Ihr Passwort sollte mindestens 8 Zeichen fassen';
+    }
+  }
+
   protected readonly localStorage = localStorage;
 }

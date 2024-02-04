@@ -36,7 +36,7 @@ export class ValidationService {
   validatePasswords(controls1: AbstractControl, controls2: AbstractControl): { check: true } | null {
     const toCheck1 = controls1.value;
     const toCheck2 = controls2.value;
-    if (toCheck1 && toCheck2 && toCheck1 !== toCheck2) {
+    if (toCheck1 !== toCheck2) {
       return {check: true};
     }
     return null;
