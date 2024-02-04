@@ -1,10 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {
   ReactiveFormsModule,
   FormControl,
   AbstractControl,
 } from "@angular/forms";
 import {NgClass, NgIf} from "@angular/common";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-start-page',
@@ -18,8 +19,12 @@ import {NgClass, NgIf} from "@angular/common";
   styleUrl: './start-page.component.scss'
 })
 export class StartPageComponent{
+  @ViewChild('emailinput') emailinput?: ElementRef<HTMLInputElement>;
   mailregex: RegExp = /[a-z0-9]+@[a-z]+\.[a-z]/;
   email: FormControl<string | null> = new FormControl('', [this.validateEmail.bind(this)]);
+
+  constructor(private router: Router) {
+  }
 
   /**
    * Validates if email matches to mailregex
@@ -44,4 +49,19 @@ export class StartPageComponent{
     }
     return
   }
+
+  /**
+   * Navigates to register or focuses emailinput
+   *
+   * @param {Event} event - Click event
+   * */
+  toRegister(event: Event): void {
+    event.preventDefault();
+    if(this.email.valid) {
+      this.router.navigate(['/registration/']);
+      return;
+    }
+    this.emailinput?.nativeElement.focus();
+  }
+
 }

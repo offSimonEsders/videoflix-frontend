@@ -22,7 +22,7 @@
               <p *ngIf="emailinput.value.length > 0" class="error-message">{{getErrorMessagePassword()}}</p>
             }
           </div>
-          <button class="standart-btn btn-big">
+          <button class="standart-btn btn-big" (click)="toRegister($event)">
             Loslegen
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                  data-mirrorinrtl="true" class="default-ltr-cache-4z3qvp e1svuwfo1" data-name="ChevronRight"
