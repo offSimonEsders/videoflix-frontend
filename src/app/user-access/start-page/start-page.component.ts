@@ -7,6 +7,7 @@ import {
 import {NgClass, NgIf} from "@angular/common";
 import {Router} from "@angular/router";
 import {FooterComponent} from "../footer/footer.component";
+import {HeaderComponent} from "../header/header.component";
 
 @Component({
   selector: 'app-start-page',
@@ -15,7 +16,8 @@ import {FooterComponent} from "../footer/footer.component";
     ReactiveFormsModule,
     NgClass,
     NgIf,
-    FooterComponent
+    FooterComponent,
+    HeaderComponent
   ],
   templateUrl: './start-page.component.html',
   styleUrl: './start-page.component.scss'
@@ -64,10 +66,6 @@ export class StartPageComponent{
       return;
     }
     this.emailinput?.nativeElement.focus();
-  }
-
-  toLogin() {
-    this.router.navigate(['/login/'])
   }
 
 }
