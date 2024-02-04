@@ -21,8 +21,8 @@ import {ValidationService} from "../../services/validation.service";
 })
 export class RegistrationComponent {
   email: FormControl<string | null> = new FormControl('', [Validators.required, this.validation.validateEmail.bind(this)]);
-  password1: FormControl<string | null> = new FormControl('', [Validators.required]);
-  password2: FormControl<string | null> = new FormControl('', [Validators.required, this.validation.validatePasswords.bind(this, this.password1)]);
+  password1: FormControl<string | null> = new FormControl('', [Validators.required, Validators.minLength(8)]);
+  password2: FormControl<string | null> = new FormControl('', [Validators.required, Validators.minLength(8), this.validation.validatePasswords.bind(this, this.password1)]);
 
   registrationGroup: FormGroup = new FormGroup({
     email: this.email,

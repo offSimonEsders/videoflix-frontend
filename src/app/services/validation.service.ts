@@ -5,7 +5,6 @@ import {AbstractControl} from "@angular/forms";
   providedIn: 'root'
 })
 export class ValidationService {
-  mailregex: RegExp = /[a-z0-9]+@[a-z]+\.[a-z]/;
 
   constructor() {
   }
@@ -18,8 +17,9 @@ export class ValidationService {
    * @returns {{check:true} | null} - to validate the errormessage
    * */
   validateEmail(controls: AbstractControl): { check: true } | null {
+    const mailregex: RegExp = /[a-z0-9]+@[a-z]+\.[a-z]/;
     const toCheck = controls.value
-    if (toCheck && !this.mailregex.test(toCheck)) {
+    if (toCheck && !mailregex.test(toCheck)) {
       return {check: true};
     }
     return null;

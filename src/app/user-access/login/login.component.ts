@@ -20,7 +20,7 @@ import {ValidationService} from "../../services/validation.service";
 export class LoginComponent {
   @ViewChild('loginform') loginform?: ElementRef;
   remember: boolean = false;
-  email: FormControl<string | null> = new FormControl('', [this.validation.validateEmail.bind(this), Validators.required]);
+  email: FormControl<string | null> = new FormControl('', [Validators.required, this.validation.validateEmail.bind(this)]);
   password: FormControl<string | null> = new FormControl('', [Validators.minLength(8), Validators.required]);
 
   loginGroup = new FormGroup({

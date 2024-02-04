@@ -25,7 +25,6 @@ import {ValidationService} from "../../services/validation.service";
 })
 export class StartPageComponent{
   @ViewChild('emailinput') emailinput?: ElementRef<HTMLInputElement>;
-  mailregex: RegExp = /[a-z0-9]+@[a-z]+\.[a-z]/;
   email: FormControl<string | null> = new FormControl('', [this.validation.validateEmail.bind(this), Validators.required]);
 
   constructor(private router: Router, private validation: ValidationService) {
