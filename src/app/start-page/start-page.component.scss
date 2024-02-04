@@ -1,0 +1,51 @@
+.start-page-frame {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 100dvw;
+  width: 100%;
+  height: 100dvh;
+  background: black;
+}
+
+.img-container {
+  position: absolute;
+  width: 100%;
+
+  &::after {
+    position: absolute;
+    bottom: 0;
+    content: '';
+    display: flex;
+    background: linear-gradient(0deg, rgba(0,0,0,1) 25%, rgba(0,0,0,0) 100%);
+    width: 100%;
+    height: 50px;
+  }
+
+}
+
+.bg-img {
+  overflow: hidden;
+  object-fit: cover;
+  width: 100%;
+  height: 350px;
+}
+
+.start-page-content {
+  max-width: 1280px;
+  width: 100%;
+  z-index: 1;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 32px;
+
+  h1 {
+    font-size: 40px;
+    color: var(--red);
+  }
+
+}
