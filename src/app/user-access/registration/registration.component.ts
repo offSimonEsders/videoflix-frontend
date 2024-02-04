@@ -56,6 +56,11 @@ export class RegistrationComponent {
     return;
   }
 
+  /**
+   * Gives back an errormessage or null
+   *
+   * @returns {string | undefined}
+   * */
   getErrorMessagePassword(): string | void {
     if(this.password2.hasError('check')) {
       return 'Passwörter müssen übereinstimmen'
