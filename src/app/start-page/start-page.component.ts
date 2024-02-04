@@ -64,4 +64,8 @@ export class StartPageComponent{
     this.emailinput?.nativeElement.focus();
   }
 
+  toLogin() {
+    this.router.navigate(['/login/'])
+  }
+
 }
