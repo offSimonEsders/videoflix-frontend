@@ -86,11 +86,16 @@ header {
 }
 
 .validate-mail {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+
   .btn-big {
     display: flex;
     align-items: center;
     width: auto;
-    height: auto;
+    height: 50px;
     padding: 12px 24px;
     font-size: 1.5rem;
   }

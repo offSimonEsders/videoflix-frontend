@@ -41,3 +41,53 @@ h1, h2, h3, p {
   }
 
 }
+
+.standart-inputcon {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+
+  input {
+    width: calc(100% - 32px);
+    padding: 1.25rem 1rem 0.25rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border: 1px solid red;
+    border-radius: 0.25rem;
+    color: #FFF;
+    background: rgba(63, 60, 60, 0.25);
+
+    &:-webkit-autofill + label {
+      color: black;
+    }
+
+    &:valid + label {
+      top: 10px;
+      transform: translateY(-50%);
+      font-size: 0.75rem;
+    }
+
+    &:focus + label {
+      top: 10px;
+      transform: translateY(-50%);
+      font-size: 0.75rem;
+    }
+  }
+
+  label {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 16px;
+    font-size: 1rem;
+  }
+
+  .error-message {
+    position: absolute;
+    bottom: -4px;
+    transform: translateY(100%);
+    left: 16px;
+    color: var(--red);
+  }
+
+}

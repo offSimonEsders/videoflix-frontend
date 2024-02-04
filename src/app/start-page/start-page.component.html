@@ -15,7 +15,13 @@
       <div action="" class="continue-mail">
         <h2>Sind Sie startklar? Geben Sie Ihre E-Mail-Adresse ein, um Ihre Mitgliedschaft zu beginnen.</h2>
         <form action="" class="validate-mail">
-          <input type="text">
+          <div class="standart-inputcon">
+            <input autocomplete="email" type="text" id="emailinput" [formControl]="email" required>
+            <label for="emailinput">E-Mail-Adresse</label>
+            @if(email.invalid) {
+              <p class="error-message">{{getErrorMessagePassword()}}</p>
+            }
+          </div>
           <button class="standart-btn btn-big">
             Loslegen
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
