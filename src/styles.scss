@@ -1,16 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
   --red: #e50914;
-  --blue: #02AEEC;
+  --red_hover: #c11119;
+  --red_active: #99161d;
 }
 
 body {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
   color: white;
+
+  * {
+    transition: 175ms;
+  }
 }
 
-h1, h2, p {
+h1, h2, h3, p {
   margin: 0;
 }
 
@@ -24,5 +29,15 @@ h1, h2, p {
   font-weight: 500;
   font-size: 0.875rem;
   color: white;
-  background-color: var(--red);
+  background: var(--red);
+
+  &:hover {
+    background: var(--red_hover);
+  }
+
+  &:active {
+    color: rgba(255,255,255,0.7);
+    background: var(--red_active);
+  }
+
 }
