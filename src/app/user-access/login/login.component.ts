@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 import {FooterComponent} from "../footer/footer.component";
 import {HeaderComponent} from "../header/header.component";
 import {CommonModule} from "@angular/common";
-import {AbstractControl, FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
+import {AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-login',
@@ -17,10 +17,16 @@ import {AbstractControl, FormControl, ReactiveFormsModule, Validators} from "@an
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+  @ViewChild('loginform') loginform?: ElementRef;
   mailregex: RegExp = /[a-z0-9]+@[a-z]+\.[a-z]/;
   remember: boolean = false;
-  email: FormControl<string | null> = new FormControl('', [this.validateEmail.bind(this)]);
-  password: FormControl<string | null> = new FormControl('', [Validators.minLength(8)]);
+  email: FormControl<string | null> = new FormControl('', [this.validateEmail.bind(this), Validators.required]);
+  password: FormControl<string | null> = new FormControl('', [Validators.minLength(8), Validators.required]);
+
+  loginGroup = new FormGroup({
+    email: this.email,
+    password: this.password
+  });
 
   /**
    * Toggles remember
@@ -65,6 +71,19 @@ export class LoginComponent {
       return 'Das Passwort sollte mindestens 8 Zeichen fassen';
     }
     return;
+  }
+
+  /**
+   * Adds userfeedback to the form or removes it
+   *
+   * @param {boolean} toValidate - to show userfeedback after failed login
+   * */
+  formUserFeedback(toValidate: undefined | boolean = undefined): void {
+    if(this.loginGroup.invalid || toValidate) {
+      this.loginform?.nativeElement.classList.add('form-not-valid');
+      return;
+    }
+    this.loginform?.nativeElement.classList.remove('form-not-valid');
   }
 
 }

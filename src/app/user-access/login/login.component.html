@@ -1,22 +1,23 @@
 <section class="login-frame">
   <app-header class="header"></app-header>
   <div class="login-content">
-    <form action="" class="login-form">
+    <h1>Einloggen</h1>
+    <form [formGroup]="loginGroup" action="" class="login-form" #loginform>
       <div class="standart-inputcon">
-        <input type="text" id="email" [formControl]="email" #emailinput required>
+        <input [ngClass]="email.valid ? 'valid' : ''" type="text" id="email" [formControl]="email" #emailinput required>
         <label for="email">E-Mail-Adresse</label>
         @if(email.invalid) {
           <p *ngIf="emailinput.value.length > 0" class="error-message">{{getErrorMessageEmail()}}</p>
         }
       </div>
       <div class="standart-inputcon">
-        <input type="password" id="password" [formControl]="password" #passwordinput required>
+        <input [ngClass]="password.valid ? 'valid' : ''" type="password" id="password" [formControl]="password" #passwordinput required>
         <label for="password">Passwort</label>
         @if(password.invalid) {
           <p *ngIf="passwordinput.value.length > 0" class="error-message">{{getErrorMessagePassword()}}</p>
         }
       </div>
-      <button class="standart-btn" type="submit">Einloggen</button>
+      <button class="standart-btn" (click)="formUserFeedback()" type="submit">Einloggen</button>
       <a href="">Password vergessen?</a>
     </form>
     <div class="remember-container">

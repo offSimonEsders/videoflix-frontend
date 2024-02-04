@@ -24,13 +24,21 @@
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 48px 68px;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0, 0, 0, 0.7);
+
+  h1 {
+    margin-bottom: 28px;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
 }
 
 .login-form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
   gap: 16px;
 
   .error-message {
@@ -56,6 +64,13 @@
 
   }
 
+}
+
+.form-not-valid {
+  &::after {
+    content: 'Die Anmeldedaten sind falsch oder unvollständig';
+    color: var(--red);
+  }
 }
 
 .remember-container {
