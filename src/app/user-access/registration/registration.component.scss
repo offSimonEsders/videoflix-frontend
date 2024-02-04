@@ -44,3 +44,10 @@
     font-size: 1rem;
   }
 }
+
+.registration-failed {
+  &::after {
+    content: 'Deine Daten sind leider ungültig';
+    color: var(--red);
+  }
+}

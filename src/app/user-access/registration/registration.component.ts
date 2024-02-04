@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {HeaderComponent} from "../header/header.component";
 import {FooterComponent} from "../footer/footer.component";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
@@ -20,6 +20,7 @@ import {ValidationService} from "../../services/validation.service";
   styleUrl: './registration.component.scss'
 })
 export class RegistrationComponent {
+  @ViewChild('registrationform') registrationform?: ElementRef;
   email: FormControl<string | null> = new FormControl('', [Validators.required, this.validation.validateEmail.bind(this)]);
   password1: FormControl<string | null> = new FormControl('', [Validators.required, Validators.minLength(8)]);
   password2: FormControl<string | null> = new FormControl('', [Validators.required, Validators.minLength(8), this.validation.validatePasswords.bind(this, this.password1)]);
@@ -39,7 +40,7 @@ export class RegistrationComponent {
    * */
   getEmail(): void {
     const email: string | null = localStorage.getItem('email');
-    if(email) {
+    if (email) {
       this.email.setValue(JSON.parse(email));
     }
   }
@@ -62,11 +63,19 @@ export class RegistrationComponent {
    * @returns {string | undefined}
    * */
   getErrorMessagePassword(): string | void {
-    if(this.password2.hasError('check')) {
+    if (this.password2.hasError('check')) {
       return 'Passwörter müssen übereinstimmen'
     } else if (this.password2.hasError('minlength')) {
       return 'Ihr Passwort sollte mindestens 8 Zeichen fassen';
     }
+  }
+
+  formUserfeedback() {
+    if (this.registrationGroup.invalid) {
+      this.registrationform?.nativeElement.classList.add('registration-failed');
+      return;
+    }
+    this.registrationform?.nativeElement.classList.remove('registration-failed');
   }
 
   protected readonly localStorage = localStorage;
