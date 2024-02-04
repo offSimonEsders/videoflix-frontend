@@ -1,0 +1,22 @@
+.footer-frame {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  max-width: 100dvw;
+  height: 50px;
+  z-index: 1;
+  border-top: 5px solid grey;
+  background: black;
+}
+
+footer {
+  display: flex;
+  gap: 40px;
+
+  a {
+
+    color: white;
+  }
+
+}

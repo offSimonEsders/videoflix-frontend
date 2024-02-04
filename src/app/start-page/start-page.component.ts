@@ -6,6 +6,7 @@ import {
 } from "@angular/forms";
 import {NgClass, NgIf} from "@angular/common";
 import {Router} from "@angular/router";
+import {FooterComponent} from "../footer/footer.component";
 
 @Component({
   selector: 'app-start-page',
@@ -13,7 +14,8 @@ import {Router} from "@angular/router";
   imports: [
     ReactiveFormsModule,
     NgClass,
-    NgIf
+    NgIf,
+    FooterComponent
   ],
   templateUrl: './start-page.component.html',
   styleUrl: './start-page.component.scss'

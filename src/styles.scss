@@ -6,6 +6,10 @@
   --green: #00ff00;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
@@ -95,4 +99,10 @@ h1, h2, h3, p {
     color: var(--red);
   }
 
+}
+
+.footer {
+  position: absolute;
+  top: 100%;
+  width: 100%;
 }
