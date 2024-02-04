@@ -3,6 +3,7 @@
   --red: #e50914;
   --red_hover: #c11119;
   --red_active: #99161d;
+  --green: #00ff00;
 }
 
 body {
@@ -72,6 +73,10 @@ h1, h2, h3, p {
       transform: translateY(-50%);
       font-size: 0.75rem;
     }
+  }
+
+  .valid {
+    border-color: var(--green);
   }
 
   label {
