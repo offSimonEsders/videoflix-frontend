@@ -15,8 +15,14 @@ header {
     width: 100%;
 
     h1 {
+      cursor: pointer;
       font-size: 40px;
       color: var(--red);
+
+      &:hover {
+        text-shadow: #E50914FF 0 0 20px;
+      }
+
     }
 
   }

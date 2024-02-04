@@ -1,6 +1,6 @@
 <header>
   <div class="header-content">
-    <h1>Videoflix</h1>
+    <h1 (click)="toStartpage()">Videoflix</h1>
     <button *ngIf="router.url !== '/login'" class="standart-btn" (click)="toLogin()">Einloggen</button>
   </div>
 </header>

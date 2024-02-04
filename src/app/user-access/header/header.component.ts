@@ -16,7 +16,11 @@ export class HeaderComponent {
   constructor(public router: Router) {
   }
 
-  toLogin() {
-    this.router.navigate(['/login/'])
+  toLogin(): void {
+    this.router.navigate(['/login/']);
+  }
+
+  toStartpage(): void {
+    this.router.navigate(['']);
   }
 }
