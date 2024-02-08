@@ -85,7 +85,7 @@ export class RegistrationComponent {
    * Checks if the data is valid.
    * If the data is valid it calls createUserAndCallRegister
    * */
-  registerNewUser() {
+  registerNewUser(): void {
     this.formUserfeedback();
     if(this.registrationGroup.valid) {
       this.registrationGroup.disable();
