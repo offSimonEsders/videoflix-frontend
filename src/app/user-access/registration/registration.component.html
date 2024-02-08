@@ -4,6 +4,13 @@
     <h1>Registrieren</h1>
     <form [formGroup]="registrationGroup" class="registration-form" #registrationform>
       <div class="standart-inputcon">
+        <input autocomplete="given-name" [ngClass]="username.valid ? 'valid' : ''" type="text" id="name" [formControl]="username" #usernameinput required>
+        <label for="name">Nutzername</label>
+        @if(username.invalid) {
+          <p *ngIf="usernameinput.value.length > 0" class="error-message">{{getErrorMessageUsername()}}</p>
+        }
+      </div>
+      <div class="standart-inputcon">
         <input autocomplete="email" [ngClass]="email.valid ? 'valid' : ''" type="text" id="email" [formControl]="email" #emailinput required>
         <label for="email">E-Mail-Adresse</label>
         @if(email.invalid) {
@@ -21,7 +28,7 @@
           <p *ngIf="passwordinput.value.length > 0" class="error-message">{{getErrorMessagePassword()}}</p>
         }
       </div>
-      <button (click)="formUserfeedback()" class="standart-btn">Registrieren</button>
+      <button (click)="registerNewUser()" class="standart-btn">Registrieren</button>
     </form>
   </div>
   <app-footer class="footer"></app-footer>

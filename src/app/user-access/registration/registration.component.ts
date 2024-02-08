@@ -4,6 +4,8 @@ import {FooterComponent} from "../footer/footer.component";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgClass, NgIf} from "@angular/common";
 import {ValidationService} from "../../services/validation.service";
+import {BackendServiceService} from "../../services/backend-service.service";
+import {Videoflixuser} from "../../modules/videoflixuser";
 
 @Component({
   selector: 'app-registration',
@@ -21,17 +23,19 @@ import {ValidationService} from "../../services/validation.service";
 })
 export class RegistrationComponent {
   @ViewChild('registrationform') registrationform?: ElementRef;
+  username: FormControl<string | null> = new FormControl('', [Validators.minLength(6), Validators.required])
   email: FormControl<string | null> = new FormControl('', [Validators.required, this.validation.validateEmail.bind(this)]);
   password1: FormControl<string | null> = new FormControl('', [Validators.required, Validators.minLength(8)]);
   password2: FormControl<string | null> = new FormControl('', [Validators.required, Validators.minLength(8), this.validation.validatePasswords.bind(this, this.password1)]);
 
   registrationGroup: FormGroup = new FormGroup({
+    username: this.username,
     email: this.email,
     password1: this.password1,
     password2: this.password2
   })
 
-  constructor(private validation: ValidationService) {
+  constructor(private validation: ValidationService, private backendservice: BackendServiceService) {
     this.getEmail();
   }
 
@@ -43,6 +47,13 @@ export class RegistrationComponent {
     if (email) {
       this.email.setValue(JSON.parse(email));
     }
+  }
+
+  getErrorMessageUsername(): string | undefined {
+    if(this.username.hasError('minlength')){
+      return 'Dein Nutzername sollte mindestens 6 Zeichen fassen';
+    }
+    return;
   }
 
   /**
@@ -70,7 +81,24 @@ export class RegistrationComponent {
     }
   }
 
-  formUserfeedback() {
+  /**
+   * Checks if the data is valid.
+   * If the data is valid it calls createUserAndCallRegister
+   * */
+  registerNewUser() {
+    this.formUserfeedback();
+    if(this.registrationGroup.valid) {
+      this.registrationGroup.disable();
+      this.createUserAndCallRegister();
+      this.registrationGroup.reset();
+      this.registrationGroup.enable();
+    }
+  }
+
+  /**
+   * Shows feedback if the formdata is invalid
+   * */
+  formUserfeedback(): void {
     if (this.registrationGroup.invalid) {
       this.registrationform?.nativeElement.classList.add('registration-failed');
       return;
@@ -78,5 +106,18 @@ export class RegistrationComponent {
     this.registrationform?.nativeElement.classList.remove('registration-failed');
   }
 
-  protected readonly localStorage = localStorage;
+  /**
+   * Gets data from form creates a new Videoflixuser with the data and makes a post to the backend
+   * */
+  async createUserAndCallRegister(): Promise<void> {
+    const username: string | null = this.username.value;
+    const email: string | null = this.email.value;
+    const password: string | null = this.password2.value;
+    if(username && email && password) {
+      const newUser: Videoflixuser = new Videoflixuser(username, email, password);
+      const resp: Response | undefined = await this.backendservice.register(newUser);
+    }
+  }
+
+  protected readonly localStorage: Storage = localStorage;
 }
