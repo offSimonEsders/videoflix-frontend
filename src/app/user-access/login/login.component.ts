@@ -4,6 +4,7 @@ import {HeaderComponent} from "../header/header.component";
 import {CommonModule} from "@angular/common";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ValidationService} from "../../services/validation.service";
+import {BackendServiceService} from "../../services/backend-service.service";
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,7 @@ export class LoginComponent {
     password: this.password
   });
 
-  constructor(private validation: ValidationService) {
+  constructor(private validation: ValidationService, private backendService: BackendServiceService) {
   }
 
   /**
@@ -97,6 +98,13 @@ export class LoginComponent {
       return JSON.parse(item);
     }
     return false;
+  }
+
+  async login(email: string, password: string) {
+    if(this.loginGroup.valid) {
+      const resp: Response | undefined = await this.backendService.login(email, password);
+      console.log(await resp?.json())
+    }
   }
 
 }

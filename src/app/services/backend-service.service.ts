@@ -18,4 +18,12 @@ export class BackendServiceService {
     }
   }
 
+  async login(email: string, password: string) {
+    try {
+      return await fetch(URL + '/users/login/', {method:'POST', body: JSON.stringify({email: email, password: password})});
+    } catch {
+      return
+    }
+  }
+
 }

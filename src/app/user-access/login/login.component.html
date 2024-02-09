@@ -17,7 +17,7 @@
           <p *ngIf="passwordinput.value.length > 0" class="error-message">{{getErrorMessagePassword()}}</p>
         }
       </div>
-      <button class="standart-btn" (click)="formUserFeedback()" type="submit">Einloggen</button>
+      <button class="standart-btn" (click)="formUserFeedback(); login(emailinput.value, passwordinput.value)" type="submit">Einloggen</button>
       <a href="">Password vergessen?</a>
     </form>
     <div class="remember-container">
