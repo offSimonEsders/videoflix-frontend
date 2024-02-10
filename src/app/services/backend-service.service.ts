@@ -1,7 +1,9 @@
 import {Injectable} from '@angular/core';
 import {environment} from "../environments/environment";
 import {Videoflixuser} from "../modules/videoflixuser";
+
 const URL: string = environment.apiUrl;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,7 +19,7 @@ export class BackendServiceService {
    * */
   async register(user: Videoflixuser) {
     try {
-      return await fetch(URL + '/users/register/', {method:'POST', body: JSON.stringify(user)});
+      return await fetch(URL + '/users/register/', {method: 'POST', body: JSON.stringify(user)});
     } catch {
       return
     }
@@ -31,7 +33,10 @@ export class BackendServiceService {
    * */
   async login(email: string, password: string): Promise<Response | undefined> {
     try {
-      return await fetch(URL + '/users/login/', {method:'POST', body: JSON.stringify({email: email, password: password})});
+      return await fetch(URL + '/users/login/', {
+        method: 'POST',
+        body: JSON.stringify({email: email, password: password})
+      });
     } catch {
       return;
     }
@@ -43,7 +48,20 @@ export class BackendServiceService {
   async logout(): Promise<Response | undefined> {
     const authtoken: string | null = localStorage.getItem('authtoken')
     try {
-      return await fetch(URL + '/users/logout/', {method: 'DELETE', headers: {Authorization: `Token ${authtoken}`}, body: JSON.stringify({token: authtoken})});
+      return await fetch(URL + '/users/logout/', {
+        method: 'DELETE',
+        headers: {Authorization: `Token ${authtoken}`},
+        body: JSON.stringify({token: authtoken})
+      });
+    } catch {
+      return;
+    }
+  }
+
+  async checkToken(): Promise<Response | undefined> {
+    const authtoken: string | null = localStorage.getItem('authtoken');
+    try {
+      return await fetch(URL + '/users/checktoken/', {method: 'POST', headers: {Authorization: `Token ${authtoken}`}});
     } catch {
       return;
     }

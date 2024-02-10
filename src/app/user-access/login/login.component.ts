@@ -5,6 +5,7 @@ import {CommonModule} from "@angular/common";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ValidationService} from "../../services/validation.service";
 import {BackendServiceService} from "../../services/backend-service.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -29,7 +30,7 @@ export class LoginComponent {
     password: this.password
   });
 
-  constructor(private validation: ValidationService, private backendService: BackendServiceService) {
+  constructor(private validation: ValidationService, private backendService: BackendServiceService, private router: Router) {
   }
 
   /**
@@ -108,10 +109,12 @@ export class LoginComponent {
    * */
   async login(email: string, password: string) {
     if(this.loginGroup.valid) {
+      this.loginGroup.reset()
       const resp: Response | undefined = await this.backendService.login(email, password);
       if(resp?.ok) {
         const respj = await resp?.json();
         localStorage.setItem('authtoken', respj.response)
+        await this.router.navigate(['home'])
       }
     }
   }
