@@ -58,6 +58,9 @@ export class BackendServiceService {
     }
   }
 
+  /**
+   * Sends the authtoken to the backend. The backend responses if the authtoken is valid
+   * */
   async checkToken(): Promise<Response | undefined> {
     const authtoken: string | null = localStorage.getItem('authtoken');
     try {

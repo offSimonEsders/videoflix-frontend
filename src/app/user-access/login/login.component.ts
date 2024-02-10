@@ -119,7 +119,12 @@ export class LoginComponent {
     }
   }
 
-  async sendToHome(resp: Response) {
+  /**
+   * Sends the client to home when the login is successful
+   *
+   * @param {Response} resp
+   * */
+  async sendToHome(resp: Response): Promise<void> {
     if(resp?.ok) {
       const respj = await resp?.json();
       localStorage.setItem('authtoken', respj.response)
@@ -128,7 +133,10 @@ export class LoginComponent {
     }
   }
 
-  toggelLoginFailed() {
+  /**
+   * Toggles the showFeedback variable to show or hide the feedback from the frontend
+   * */
+  toggelLoginFailed(): void {
   this.showFeedback = !this.showFeedback;
   }
 
