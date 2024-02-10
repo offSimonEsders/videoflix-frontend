@@ -21,6 +21,7 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent {
   @ViewChild('loginform') loginform?: ElementRef;
+  showFeedback: boolean = false;
   remember: boolean = false;
   email: FormControl<string | null> = new FormControl('', [Validators.required, this.validation.validateEmail.bind(this)]);
   password: FormControl<string | null> = new FormControl('', [Validators.minLength(8), Validators.required]);
@@ -111,12 +112,24 @@ export class LoginComponent {
     if(this.loginGroup.valid) {
       this.loginGroup.reset()
       const resp: Response | undefined = await this.backendService.login(email, password);
-      if(resp?.ok) {
-        const respj = await resp?.json();
-        localStorage.setItem('authtoken', respj.response)
-        await this.router.navigate(['home'])
+      if(resp) {
+        await this.sendToHome(resp);
       }
+      this.toggelLoginFailed();
     }
+  }
+
+  async sendToHome(resp: Response) {
+    if(resp?.ok) {
+      const respj = await resp?.json();
+      localStorage.setItem('authtoken', respj.response)
+      await this.router.navigate(['home'])
+      return
+    }
+  }
+
+  toggelLoginFailed() {
+  this.showFeedback = !this.showFeedback;
   }
 
 }

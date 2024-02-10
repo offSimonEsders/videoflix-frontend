@@ -1,5 +1,8 @@
 <section class="login-frame">
   <app-header class="header"></app-header>
+  <div class="user-feedback" *ngIf="showFeedback" (animationend)="toggelLoginFailed()">
+    Der Login ist fehlgeschlagen. Musst du dich noch verifizieren?
+  </div>
   <div class="login-content">
     <h1>Einloggen</h1>
     <form [formGroup]="loginGroup" action="" class="login-form" #loginform>
