@@ -23,6 +23,7 @@ import {Videoflixuser} from "../../modules/videoflixuser";
 })
 export class RegistrationComponent {
   @ViewChild('registrationform') registrationform?: ElementRef;
+  userFeedback: string | undefined = undefined;
   username: FormControl<string | null> = new FormControl('', [Validators.minLength(6), Validators.required])
   email: FormControl<string | null> = new FormControl('', [Validators.required, this.validation.validateEmail.bind(this)]);
   password1: FormControl<string | null> = new FormControl('', [Validators.required, Validators.minLength(8)]);
@@ -50,7 +51,7 @@ export class RegistrationComponent {
   }
 
   getErrorMessageUsername(): string | undefined {
-    if(this.username.hasError('minlength')){
+    if (this.username.hasError('minlength')) {
       return 'Dein Nutzername sollte mindestens 6 Zeichen fassen';
     }
     return;
@@ -87,7 +88,7 @@ export class RegistrationComponent {
    * */
   registerNewUser(): void {
     this.formUserfeedback();
-    if(this.registrationGroup.valid) {
+    if (this.registrationGroup.valid) {
       this.registrationGroup.disable();
       this.createUserAndCallRegister();
       this.registrationGroup.reset();
@@ -113,10 +114,19 @@ export class RegistrationComponent {
     const username: string | null = this.username.value;
     const email: string | null = this.email.value;
     const password: string | null = this.password2.value;
-    if(username && email && password) {
+    if (username && email && password) {
       const newUser: Videoflixuser = new Videoflixuser(username, email, password);
       const resp: Response | undefined = await this.backendservice.register(newUser);
+      if(resp?.ok) {
+        this.userFeedback = 'Die Registrierung war erfolgreich. Verifiziere dich über die Email.';
+        return;
+      }
+      this.userFeedback = 'Oh. Etwas ist schiefgelaufen';
     }
+  }
+
+  hideShowFeedback(): void {
+    this.userFeedback = undefined;
   }
 
   protected readonly localStorage: Storage = localStorage;

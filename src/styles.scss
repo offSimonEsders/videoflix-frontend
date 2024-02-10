@@ -101,8 +101,31 @@ h1, h2, h3, p {
 
 }
 
+.user-feedback {
+  position: fixed;
+  padding: 28px 38px;
+  bottom: 0;
+  right: 0;
+  transform: translateX(100%);
+  animation: userFeedbackSlideIn 3.5s forwards;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
 .footer {
   position: absolute;
   top: 100%;
   width: 100%;
 }
+
+@keyframes userFeedbackSlideIn {
+  20% {
+    transform: translateX(0%);
+  }
+  90% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+

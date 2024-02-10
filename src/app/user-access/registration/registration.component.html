@@ -1,5 +1,8 @@
 <section class="registration-frame">
   <app-header></app-header>
+  <div class="user-feedback" *ngIf="userFeedback" (animationend)="hideShowFeedback()">
+    {{userFeedback}}
+  </div>
   <div class="registration-content">
     <h1>Registrieren</h1>
     <form [formGroup]="registrationGroup" class="registration-form" #registrationform>
