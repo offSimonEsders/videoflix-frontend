@@ -37,4 +37,16 @@ export class BackendServiceService {
     }
   }
 
+  /**
+   * Sends a delete request to the backend where the auth token from the user gets deleted so the user has be logged in again
+   * */
+  async logout(): Promise<Response | undefined> {
+    const authtoken: string | null = localStorage.getItem('authtoken')
+    try {
+      return await fetch(URL + '/users/logout/', {method: 'DELETE', headers: {Authorization: `Token ${authtoken}`}, body: JSON.stringify({token: authtoken})});
+    } catch {
+      return;
+    }
+  }
+
 }
