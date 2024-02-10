@@ -10,6 +10,11 @@ export class BackendServiceService {
   constructor() {
   }
 
+  /**
+   * Sends a new Videoflixuser to the backend. The backend the response if it was successfully
+   *
+   * @param {Videoflixuser} user
+   * */
   async register(user: Videoflixuser) {
     try {
       return await fetch(URL + '/users/register/', {method:'POST', body: JSON.stringify(user)});
@@ -18,11 +23,17 @@ export class BackendServiceService {
     }
   }
 
-  async login(email: string, password: string) {
+  /**
+   * Sends the data to the backend and returns the response
+   *
+   * @param email
+   * @param password
+   * */
+  async login(email: string, password: string): Promise<Response | undefined> {
     try {
       return await fetch(URL + '/users/login/', {method:'POST', body: JSON.stringify({email: email, password: password})});
     } catch {
-      return
+      return;
     }
   }
 

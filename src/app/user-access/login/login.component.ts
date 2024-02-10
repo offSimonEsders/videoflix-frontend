@@ -100,10 +100,19 @@ export class LoginComponent {
     return false;
   }
 
+  /**
+   * Sends email and password to the backend. The backend validates them and response an error or an auth token for the user
+   *
+   * @param {string} email
+   * @param {string} password
+   * */
   async login(email: string, password: string) {
     if(this.loginGroup.valid) {
       const resp: Response | undefined = await this.backendService.login(email, password);
-      console.log(await resp?.json())
+      if(resp?.ok) {
+        const respj = await resp?.json();
+        localStorage.setItem('authtoken', respj.response)
+      }
     }
   }
 
