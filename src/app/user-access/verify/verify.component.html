@@ -1,0 +1,16 @@
+<section class="verify-frame">
+  <app-header></app-header>
+  <div class="user-feedback" *ngIf="showFeedback">
+    Etwas ist schiefgelaufen
+  </div>
+  <div class="verify-content" *ngIf="verified === false">
+    <h1>Verifiziere deinen Account</h1>
+    <button class="standart-btn" (click)="verifyUser()">
+      Klicke hier
+    </button>
+  </div>
+  <div class="verify-content" *ngIf="verified">
+    <h1>{{feedback}}</h1>
+  </div>
+  <app-footer class="footer"></app-footer>
+</section>

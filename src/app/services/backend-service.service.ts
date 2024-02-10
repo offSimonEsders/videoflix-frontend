@@ -70,4 +70,20 @@ export class BackendServiceService {
     }
   }
 
+  async checkVerifyToken(token: string) {
+    try {
+      return await fetch(URL + '/users/checkverifytoken/', {method: 'POST', body: JSON.stringify({token: token})});
+    } catch {
+      return;
+    }
+  }
+
+  async verifyUser(token: string): Promise<Response | undefined> {
+    try {
+      return await fetch(URL + '/users/verifyuser/', {method: 'POST', body: JSON.stringify({token: token})});
+    } catch {
+      return;
+    }
+  }
+
 }
