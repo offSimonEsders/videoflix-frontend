@@ -29,9 +29,12 @@ export class VerifyComponent implements OnInit {
     this.checkIfVerificationCodeIsValid();
   }
 
+  /**
+   * Checks if user is already verified and sets the response to the feedback
+   * */
   async checkIfVerificationCodeIsValid(): Promise<void> {
     if (this.token) {
-      const resp = await this.backendService.checkVerifyToken(this.token);
+      const resp: Response | undefined = await this.backendService.checkVerifyToken(this.token);
       if (resp?.status === 208 || resp?.status === 400) {
         const respj = await resp.json();
         this.verified = true;
@@ -43,11 +46,14 @@ export class VerifyComponent implements OnInit {
     }
   }
 
-  async verifyUser() {
+  /**
+   * Sends the verifytoken to the backend so that the user can be verified
+   * */
+  async verifyUser(): Promise<void> {
     if (this.token) {
-      const resp = await this.backendService.verifyUser(this.token);
+      const resp: Response | undefined = await this.backendService.verifyUser(this.token);
       if(resp?.ok) {
-        this.router.navigate(['login']);
+        await this.router.navigate(['login']);
       }
       this.showFeedback = true;
     }
