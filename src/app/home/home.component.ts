@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
   getRandomBannerVideo() {
     if(this.data) {
       const index: number = Math.round(this.data.length * Math.random());
-      if(index > 0) {
+      if(this.data.length > 1 && index > 0) {
         this.bannerVideo = this.data[index];
       } else {
         this.bannerVideo = this.data[0];
