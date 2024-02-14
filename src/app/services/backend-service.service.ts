@@ -78,9 +78,24 @@ export class BackendServiceService {
     }
   }
 
+  /**
+   * Sends verify token to the backend and gets if user if verified or verifies him
+   * */
   async verifyUser(token: string): Promise<Response | undefined> {
     try {
       return await fetch(URL + '/users/verifyuser/', {method: 'POST', body: JSON.stringify({token: token})});
+    } catch {
+      return;
+    }
+  }
+
+  /**
+   * Downloads the all videoinfo and returns it
+   * */
+  async getContentData(): Promise<Response | undefined> {
+    const authtoken: string | null = localStorage.getItem('authtoken');
+    try {
+      return await fetch(URL + '/video/', {method: 'GET', headers: {Authorization: `Token ${authtoken}`}});
     } catch {
       return;
     }

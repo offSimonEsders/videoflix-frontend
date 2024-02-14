@@ -1,7 +1,7 @@
 <section class="banner-frame">
-  <video [src]="videoLink"></video>
+  <video [src]="videoURL" autoplay></video>
   <div class="extra-container">
-    <h1>Test</h1>
+    <h1>{{randomVideo?.title}}</h1>
     <div class="action-btns">
       <button class="play-btn">
         Abspielen
