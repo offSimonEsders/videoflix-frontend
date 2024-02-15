@@ -3,13 +3,15 @@ import {HomeHeaderComponent} from "./home-header/home-header.component";
 import {BannerComponent} from "./banner/banner.component";
 import {BackendServiceService} from "../services/backend-service.service";
 import {Video} from "./models/video";
+import {VideoInfoComponent} from "./video-info/video-info.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
     HomeHeaderComponent,
-    BannerComponent
+    BannerComponent,
+    VideoInfoComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -28,7 +30,10 @@ export class HomeComponent implements OnInit {
     this.getRandomBannerVideo();
   }
 
-  getRandomBannerVideo() {
+  /**
+   * Sets Banner video to random index of the data
+   * */
+  getRandomBannerVideo(): void {
     if(this.data) {
       const index: number = Math.round(this.data.length * Math.random());
       if(this.data.length > 1 && index > 0) {
