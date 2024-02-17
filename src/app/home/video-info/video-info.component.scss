@@ -62,7 +62,19 @@
 }
 
 .action-info {
+  display: flex;
+  flex-direction: column;
   position: absolute;
   bottom: 5dvh;
   left: 50px;
+  gap: 10px;
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  p {
+    font-size: 1.3rem;
+  }
+
 }
