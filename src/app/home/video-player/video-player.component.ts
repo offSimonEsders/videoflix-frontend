@@ -23,6 +23,11 @@ export class VideoPlayerComponent implements OnInit {
     this.videoURL = environment.apiUrl + this.videoToPlay?.original_video + '/';
   }
 
+  /**
+   * Checks if spezific key is pressed and calls a function
+   *
+   * @param {KeyboardEvent} keyboardEvent
+   * */
   @HostListener('document:keydown', ['$event'])
   getKeyEvents(keyboardEvent: KeyboardEvent): void {
     const code: string = keyboardEvent.code
@@ -39,7 +44,10 @@ export class VideoPlayerComponent implements OnInit {
     }
   }
 
-  videoPausePlay() {
+  /**
+   * Checks if video is paused. If it is paused it is set to play else it is set to pause
+   * */
+  videoPausePlay(): void {
     if (this.video?.nativeElement.paused) {
       this.video?.nativeElement.play();
       return;
@@ -47,19 +55,28 @@ export class VideoPlayerComponent implements OnInit {
     this.video?.nativeElement.pause();
   }
 
-  skipForwards() {
+  /**
+   * Sets the currentTime of the Video += 10 seconds
+   * */
+  skipForwards(): void {
     if (this.video) {
       this.video.nativeElement.currentTime += 10;
     }
   }
 
-  skipBackwards() {
+  /**
+   * Sets the currentTime of the Video -= 10 seconds
+   * */
+  skipBackwards(): void {
     if (this.video) {
       this.video.nativeElement.currentTime -= 10;
     }
   }
 
-  mouseMoved() {
+  /**
+   * Clears the mouseTime sets the actionsbtns to display flex and starts the mouseTime again
+   * */
+  mouseMoved(): void {
     clearTimeout(this.mouseTime);
     if (this.actionbtns) {
       this.actionbtns.nativeElement.style.display = 'flex';
@@ -67,8 +84,11 @@ export class VideoPlayerComponent implements OnInit {
     this.mouseTime = this.getMouseTime();
   }
 
-  getMouseTime() {
-    return setTimeout(() => {
+  /**
+   * Returns a Timeout after which the actionbtns are set to display none
+   * */
+  getMouseTime(): number {
+    return setTimeout((): void => {
       if (this.actionbtns) {
         this.actionbtns.nativeElement.style.display = 'none';
       }
