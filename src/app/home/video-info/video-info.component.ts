@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Video} from "../models/video";
 import {NgOptimizedImage, NgStyle} from "@angular/common";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-video-info',
@@ -22,6 +23,10 @@ export class VideoInfoComponent{
    * */
   closeVideoInfo(): void {
     this.close.emit(true);
+  }
+
+  getThumbnail(): string {
+    return environment.apiUrl + this.video?.thumbnail + '/';
   }
 
 }

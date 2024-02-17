@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {Video} from "../models/video";
 import {environment} from "../../environments/environment";
 
@@ -11,6 +11,7 @@ import {environment} from "../../environments/environment";
 })
 export class BannerComponent implements OnChanges {
   @Input() randomVideo?: Video;
+  @Output() videoToInfo: EventEmitter<Video> = new EventEmitter<Video>();
   URL: string = environment.apiUrl;
   videoURL?: string;
 

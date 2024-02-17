@@ -54,4 +54,8 @@ export class HomeComponent implements OnInit {
     this.videoInfo = undefined;
   }
 
+  setVideoInfo(video: Video): void {
+    this.videoInfo = video;
+  }
+
 }

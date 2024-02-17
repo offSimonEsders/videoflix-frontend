@@ -8,7 +8,7 @@
       </svg>
     </button>
     <div class="preview">
-      <div class="thumbnail" [ngStyle]="{backgroundImage: 'url('+ video?.thumbnail +')'}"></div>
+      <div class="thumbnail" [ngStyle]="{backgroundImage: 'url('+ getThumbnail() +')'}"></div>
       <div class="action-info">
         <h1>{{ video?.title }}</h1>
         <div class="action-btns">
