@@ -4,6 +4,7 @@ import {BannerComponent} from "./banner/banner.component";
 import {BackendServiceService} from "../services/backend-service.service";
 import {Video} from "./models/video";
 import {VideoInfoComponent} from "./video-info/video-info.component";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,8 @@ import {VideoInfoComponent} from "./video-info/video-info.component";
   imports: [
     HomeHeaderComponent,
     BannerComponent,
-    VideoInfoComponent
+    VideoInfoComponent,
+    NgIf
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -19,6 +21,7 @@ import {VideoInfoComponent} from "./video-info/video-info.component";
 export class HomeComponent implements OnInit {
   data?: Video[];
   bannerVideo?: Video;
+  videoInfo: Video | undefined = undefined;
 
   constructor(private backendService: BackendServiceService) {
   }
@@ -42,6 +45,13 @@ export class HomeComponent implements OnInit {
         this.bannerVideo = this.data[0];
       }
     }
+  }
+
+  /**
+   * Sets videoInfo to undefined to hide the popup
+   * */
+  closeVideoInfo(): void {
+    this.videoInfo = undefined;
   }
 
 }

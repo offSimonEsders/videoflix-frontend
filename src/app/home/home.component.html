@@ -2,6 +2,6 @@
   <app-home-header></app-home-header>
   <div class="home-content">
     <app-banner [randomVideo]="bannerVideo"></app-banner>
-    <app-video-info></app-video-info>
+    <app-video-info (close)="closeVideoInfo()" [video]="videoInfo" *ngIf="videoInfo"></app-video-info>
   </div>
 </section>
