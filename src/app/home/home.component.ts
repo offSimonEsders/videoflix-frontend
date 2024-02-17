@@ -6,6 +6,7 @@ import {Video} from "./models/video";
 import {VideoInfoComponent} from "./video-info/video-info.component";
 import {NgForOf, NgIf} from "@angular/common";
 import {VideoElementComponent} from "./video-element/video-element.component";
+import {VideoPlayerComponent} from "./video-player/video-player.component";
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,8 @@ import {VideoElementComponent} from "./video-element/video-element.component";
     VideoInfoComponent,
     NgIf,
     VideoElementComponent,
-    NgForOf
+    NgForOf,
+    VideoPlayerComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -24,7 +26,8 @@ import {VideoElementComponent} from "./video-element/video-element.component";
 export class HomeComponent implements OnInit {
   videos?: Video[];
   bannerVideo?: Video;
-  videoInfo: Video | undefined = undefined;
+  videoInfo?: Video = undefined;
+  videoToPlay?: Video = undefined;
 
   constructor(private backendService: BackendServiceService) {
   }
@@ -34,6 +37,7 @@ export class HomeComponent implements OnInit {
     this.videos = await resp?.json();
     console.log(this.videos)
     this.getRandomBannerVideo();
+    this.videoToPlay = this.videos? this.videos[0] : undefined;
   }
 
   /**

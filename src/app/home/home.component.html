@@ -1,5 +1,6 @@
 <section class="home-frame">
   <app-home-header></app-home-header>
+  <app-video-player *ngIf="videoToPlay" [videoToPlay]="videoToPlay"></app-video-player>
   <div class="home-content">
     <app-banner (videoToInfo)="setVideoInfo($event)" [randomVideo]="bannerVideo"></app-banner>
     <app-video-info (close)="closeVideoInfo()" [video]="videoInfo" *ngIf="videoInfo"></app-video-info>
