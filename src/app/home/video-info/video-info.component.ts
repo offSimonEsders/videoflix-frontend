@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Video} from "../models/video";
 
 @Component({
@@ -10,4 +10,5 @@ import {Video} from "../models/video";
 })
 export class VideoInfoComponent {
   @Input() video?: Video;
+  @Output() close: EventEmitter<boolean> = new EventEmitter<boolean>();
 }
