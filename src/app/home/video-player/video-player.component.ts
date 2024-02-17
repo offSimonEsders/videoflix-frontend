@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
 import {Video} from "../models/video";
 import {environment} from "../../environments/environment";
 import {NgIf} from "@angular/common";
@@ -21,7 +21,22 @@ export class VideoPlayerComponent implements OnInit {
 
   ngOnInit() {
     this.videoURL = environment.apiUrl + this.videoToPlay?.original_video + '/';
-    this.getKeyEvents();
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  getKeyEvents(keyboardEvent: KeyboardEvent): void {
+    const code: string = keyboardEvent.code
+    switch (code) {
+      case 'Space':
+        this.videoPausePlay();
+        break;
+      case 'ArrowRight':
+        this.skipForwards();
+        break;
+      case 'ArrowLeft':
+        this.skipBackwards();
+        break;
+    }
   }
 
   videoPausePlay() {
@@ -58,23 +73,6 @@ export class VideoPlayerComponent implements OnInit {
         this.actionbtns.nativeElement.style.display = 'none';
       }
     }, 2000);
-  }
-
-  getKeyEvents(): void {
-    onkeydown = (keyboardEvent: KeyboardEvent): void => {
-      const code: string = keyboardEvent.code
-      switch (code) {
-        case 'Space':
-          this.videoPausePlay();
-          break;
-        case 'ArrowRight':
-          this.skipForwards();
-          break;
-        case 'ArrowLeft':
-          this.skipBackwards();
-          break;
-      }
-    }
   }
 
   protected readonly clearTimeout = clearTimeout;
