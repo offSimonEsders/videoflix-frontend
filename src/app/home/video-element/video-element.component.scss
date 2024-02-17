@@ -1,0 +1,63 @@
+.video-element-frame {
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  width: 250px;
+  height: 150px;
+  border-radius: 8px;
+  border: 1px solid white;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  &:hover {
+    scale: 1.1;
+
+    .info-button {
+      display: flex;
+    }
+
+    h1 {
+      transform: translateY(0);
+    }
+
+  }
+
+}
+
+.info-button {
+  display: none;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  height: 24px;
+  width: 24px;
+  padding: 0;
+  border-radius: 90px;
+  border: none;
+  background-color: transparent;
+
+  &:hover {
+    scale: 1.2;
+  }
+
+  &:active {
+    scale: 1.1;
+  }
+
+  svg {
+    height: 24px;
+    width: 24px;
+  }
+
+}
+
+h1 {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  transform: translateY(200%);
+}

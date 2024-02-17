@@ -3,5 +3,8 @@
   <div class="home-content">
     <app-banner (videoToInfo)="setVideoInfo($event)" [randomVideo]="bannerVideo"></app-banner>
     <app-video-info (close)="closeVideoInfo()" [video]="videoInfo" *ngIf="videoInfo"></app-video-info>
+    <div class="video-elements">
+      <app-video-element (videoToInfo)="setVideoInfo($event)" *ngFor="let video of videos" [video]="video"></app-video-element>
+    </div>
   </div>
 </section>

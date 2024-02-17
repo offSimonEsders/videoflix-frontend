@@ -4,7 +4,8 @@ import {BannerComponent} from "./banner/banner.component";
 import {BackendServiceService} from "../services/backend-service.service";
 import {Video} from "./models/video";
 import {VideoInfoComponent} from "./video-info/video-info.component";
-import {NgIf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
+import {VideoElementComponent} from "./video-element/video-element.component";
 
 @Component({
   selector: 'app-home',
@@ -13,13 +14,15 @@ import {NgIf} from "@angular/common";
     HomeHeaderComponent,
     BannerComponent,
     VideoInfoComponent,
-    NgIf
+    NgIf,
+    VideoElementComponent,
+    NgForOf
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
-  data?: Video[];
+  videos?: Video[];
   bannerVideo?: Video;
   videoInfo: Video | undefined = undefined;
 
@@ -28,8 +31,8 @@ export class HomeComponent implements OnInit {
 
   async ngOnInit() {
     const resp: Response | undefined = await this.backendService.getContentData();
-    this.data = await resp?.json();
-    console.log(this.data)
+    this.videos = await resp?.json();
+    console.log(this.videos)
     this.getRandomBannerVideo();
   }
 
@@ -37,12 +40,12 @@ export class HomeComponent implements OnInit {
    * Sets Banner video to random index of the data
    * */
   getRandomBannerVideo(): void {
-    if(this.data) {
-      const index: number = Math.round(this.data.length * Math.random());
-      if(this.data.length > 1 && index > 0) {
-        this.bannerVideo = this.data[index];
+    if(this.videos) {
+      const index: number = Math.round(this.videos.length * Math.random());
+      if(this.videos.length > 1 && index > 0) {
+        this.bannerVideo = this.videos[index];
       } else {
-        this.bannerVideo = this.data[0];
+        this.bannerVideo = this.videos[0];
       }
     }
   }

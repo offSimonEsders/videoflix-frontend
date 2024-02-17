@@ -1,8 +1,8 @@
 .home-frame {
   max-width: 100dvw;
   width: 100%;
-  height: 100dvh;
-  background: black;
+  min-height: 100dvh;
+  height: fit-content;
 }
 
 .home-content {
@@ -10,4 +10,14 @@
   top: 0;
   height: fit-content;
   width: 100%;
+  background: black;
+}
+
+.video-elements {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 40px;
+  gap: 40px;
 }
