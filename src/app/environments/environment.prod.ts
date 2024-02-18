@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://videoflix.simon-esders.de'
+  apiUrl: 'https://SimonEsders.pythonanywhere.com'
 };
