@@ -2,7 +2,7 @@
   <app-home-header></app-home-header>
   <app-video-player *ngIf="videoToPlay && router.url === '/home/videoplayer'"
                     [videoToPlay]="videoToPlay"></app-video-player>
-  <div class="home-content" *ngIf="router.url === '/home'">
+  <div class="home-content" *ngIf="router.url !== '/home/videoplayer'">
     <app-banner (playVideo)="setVideoToPlayAndOpenVideoplayer($event)" (videoToInfo)="setVideoInfo($event)" [randomVideo]="bannerVideo"></app-banner>
     <app-video-info (play)="setVideoToPlayAndOpenVideoplayer($event)" (close)="closeVideoInfo()" [video]="videoInfo" *ngIf="videoInfo"></app-video-info>
     <div class="video-elements">
