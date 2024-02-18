@@ -12,6 +12,7 @@ import {environment} from "../../environments/environment";
 export class BannerComponent implements OnChanges {
   @Input() randomVideo?: Video;
   @Output() videoToInfo: EventEmitter<Video> = new EventEmitter<Video>();
+  @Output() playVideo: EventEmitter<Video> = new EventEmitter<Video>();
   URL: string = environment.apiUrl;
   videoURL?: string;
 
@@ -22,6 +23,13 @@ export class BannerComponent implements OnChanges {
     if (this.randomVideo) {
       this.videoURL = this.URL + this.randomVideo.original_video + '/';
     }
+  }
+
+  /**
+   * Emits the given video to home to play it in the Videoplayer
+   * */
+  sendVideoToPlay(): void {
+    this.playVideo.emit(this.randomVideo);
   }
 
 }

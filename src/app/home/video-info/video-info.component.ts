@@ -16,6 +16,7 @@ import {environment} from "../../environments/environment";
 export class VideoInfoComponent{
   @Input() video?: Video;
   @Output() close: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() play: EventEmitter<Video> = new EventEmitter<Video>();
   protected readonly NaN = NaN;
 
   /**
@@ -25,8 +26,18 @@ export class VideoInfoComponent{
     this.close.emit(true);
   }
 
+  /**
+   * returns the url to the thumbanail
+   * */
   getThumbnail(): string {
     return environment.apiUrl + this.video?.thumbnail + '/';
+  }
+
+  /**
+   * Emits video to the player
+   * */
+  playVideo(): void {
+    this.play.emit(this.video);
   }
 
 }

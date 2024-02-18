@@ -1,7 +1,8 @@
-import {Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, HostListener, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Video} from "../models/video";
 import {environment} from "../../environments/environment";
 import {NgIf} from "@angular/common";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-video-player',
@@ -18,6 +19,9 @@ export class VideoPlayerComponent implements OnInit {
   @ViewChild('actionbtns') actionbtns?: ElementRef<HTMLDivElement>;
   videoURL?: string;
   mouseTime: number = this.getMouseTime();
+
+  constructor(private router: Router) {
+  }
 
   ngOnInit() {
     this.videoURL = environment.apiUrl + this.videoToPlay?.original_video + '/';
@@ -93,6 +97,13 @@ export class VideoPlayerComponent implements OnInit {
         this.actionbtns.nativeElement.style.display = 'none';
       }
     }, 2000);
+  }
+
+  /**
+   * Sends the client back to the home component
+   * */
+  backToHome() {
+    this.router.navigate(['home']);
   }
 
   protected readonly clearTimeout = clearTimeout;

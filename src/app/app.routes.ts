@@ -5,11 +5,14 @@ import {RegistrationComponent} from "./user-access/registration/registration.com
 import {HomeComponent} from "./home/home.component";
 import {AuthGuardService} from "./services/auth-guard.service";
 import {VerifyComponent} from "./user-access/verify/verify.component";
+import {VideoPlayerComponent} from "./home/video-player/video-player.component";
 
 export const routes: Routes = [
   {path: '', component: StartPageComponent},
   {path: 'login', component: LoginComponent},
   {path: 'registration', component: RegistrationComponent},
-  {path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
+  {path: 'home', component: HomeComponent, canActivate: [AuthGuardService], children: [
+      {path: 'videoplayer', component: VideoPlayerComponent}
+    ]},
   {path: 'verify', component: VerifyComponent}
 ];

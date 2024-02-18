@@ -1,4 +1,4 @@
-<section class="video-element-frame" [ngStyle]="{backgroundImage: 'url('+ getThumbnail() +')'}">
+<section class="video-element-frame" (click)="sendVideoToPlay($event)" [ngStyle]="{backgroundImage: 'url('+ getThumbnail() +')'}">
   <button class="info-button" (click)="videoToInfo.emit(video)">
     <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
       <path fill="white"
