@@ -18,20 +18,3 @@ h1 {
     text-shadow: #E50914FF 0 0 20px;
   }
 }
-
-nav {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-
-  li {
-    cursor: pointer;
-    list-style: none;
-
-    &:hover {
-      color: var(--red);
-      text-decoration: underline;
-    }
-
-  }
-}
