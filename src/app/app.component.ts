@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import {Router, RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,4 +11,12 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'videoflix-frontend';
+
+  constructor(private router: Router) {
+    const item: string | null = localStorage.getItem('rememberme');
+    if (item === 'true') {
+      this.router.navigate(['home']);
+    }
+  }
+
 }

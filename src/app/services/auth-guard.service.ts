@@ -19,6 +19,7 @@ export class AuthGuardService implements CanActivate {
     if(resp?.ok) {
       return true;
     }
+    localStorage.setItem('rememberme', JSON.stringify(false));
     return this.router.navigate(['login'])
   }
 
