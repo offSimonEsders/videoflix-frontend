@@ -54,7 +54,7 @@ export class ResetPasswordComponent {
       if(resp?.ok) {
         this.show = 1;
       } else {
-        this.show = 0;
+        this.show = 2;
       }
     }
   }
