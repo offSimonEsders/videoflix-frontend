@@ -6,6 +6,7 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {ValidationService} from "../../services/validation.service";
 import {BackendServiceService} from "../../services/backend-service.service";
 import {Router} from "@angular/router";
+import {ForgotPasswordComponent} from "./forgot-password/forgot-password.component";
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ import {Router} from "@angular/router";
     FooterComponent,
     HeaderComponent,
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ForgotPasswordComponent
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
@@ -22,6 +24,7 @@ import {Router} from "@angular/router";
 export class LoginComponent {
   @ViewChild('loginform') loginform?: ElementRef;
   showFeedback: boolean = false;
+  showResetPassword: boolean = false;
   remember: boolean = false;
   email: FormControl<string | null> = new FormControl('', [Validators.required, this.validation.validateEmail.bind(this)]);
   password: FormControl<string | null> = new FormControl('', [Validators.minLength(8), Validators.required]);
@@ -138,6 +141,11 @@ export class LoginComponent {
    * */
   toggelLoginFailed(): void {
   this.showFeedback = !this.showFeedback;
+  }
+
+  toggleShowResetPassword(): void {
+    console.log("test")
+    this.showResetPassword = !this.showResetPassword;
   }
 
 }

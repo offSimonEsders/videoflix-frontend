@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AbstractControl} from "@angular/forms";
+import {AbstractControl, FormControl} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +40,18 @@ export class ValidationService {
       return {check: true};
     }
     return null;
+  }
+
+  /**
+   * Validates the result of the validated formcontrol and returns an errormessage for Email
+   *
+   * @returns {string | undefined}
+   * */
+  getErrorMessageEmail(control: FormControl) {
+    if (control.hasError('check')) {
+      return 'Bitte geben Sie eine gültige Email-Adresse ein';
+    }
+    return;
   }
 
 }

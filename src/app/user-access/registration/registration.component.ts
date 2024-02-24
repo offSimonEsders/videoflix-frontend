@@ -57,16 +57,8 @@ export class RegistrationComponent {
     return;
   }
 
-  /**
-   * Gives back an errormessage or null
-   *
-   * @returns {string | undefined}
-   * */
   getErrorMessageEmail(): string | undefined {
-    if (this.email.hasError('check')) {
-      return 'Bitte geben Sie eine gültige Email-Adresse ein';
-    }
-    return;
+    return this.validation.getErrorMessageEmail(this.email);
   }
 
   /**

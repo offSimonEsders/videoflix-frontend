@@ -3,7 +3,7 @@
   <div class="user-feedback" *ngIf="showFeedback" (animationend)="toggelLoginFailed()">
     Der Login ist fehlgeschlagen. Musst du dich noch verifizieren?
   </div>
-  <div class="login-content">
+  <div class="login-content" *ngIf="!showResetPassword">
     <h1>Einloggen</h1>
     <form [formGroup]="loginGroup" action="" class="login-form" #loginform>
       <div class="standart-inputcon">
@@ -21,7 +21,7 @@
         }
       </div>
       <button class="standart-btn" (click)="formUserFeedback(); login(emailinput.value, passwordinput.value)" type="submit">Einloggen</button>
-      <a href="">Password vergessen?</a>
+      <a (click)="toggleShowResetPassword()">Password vergessen?</a>
     </form>
     <div class="remember-container">
       <input style="display: none" type="checkbox" name="remember" id="remember" (change)="toggleRemember()" [checked]="getRememberme()" #remembermecheckbox>
@@ -39,5 +39,6 @@
       <p>Benutzerdaten merken</p>
     </div>
   </div>
+  <app-forgot-password *ngIf="showResetPassword" (closeEvent)="toggleShowResetPassword()"></app-forgot-password>
   <app-footer class="footer"></app-footer>
 </section>

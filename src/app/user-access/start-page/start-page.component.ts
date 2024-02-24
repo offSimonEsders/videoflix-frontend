@@ -31,16 +31,8 @@ export class StartPageComponent{
   constructor(private router: Router, private validation: ValidationService) {
   }
 
-  /**
-   * Checks if email has error and returns error message
-   *
-   * @returns {string | undefined} - error message or no errormessage
-   * */
-  getErrorMessageEmail(): string | undefined {
-    if (this.email.hasError('check')) {
-      return 'Bitte geben Sie eine gültige Email-Adresse ein';
-    }
-    return;
+  getErrorMessageEmail(): string | undefined{
+    return this.validation.getErrorMessageEmail(this.email);
   }
 
   /**
