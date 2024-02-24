@@ -101,7 +101,7 @@ export class BackendServiceService {
     }
   }
 
-  async requestResetPassword() {
+  async requestResetPassword(): Promise<Response | undefined> {
     try {
       return await fetch(URL + '/users/requestresetpassword/', {
         method: 'POST',
@@ -112,9 +112,17 @@ export class BackendServiceService {
     }
   }
 
-  async checkKey(key: string) {
+  async checkKey(key: string): Promise<Response | undefined> {
     try {
       return await fetch(URL + '/users/checkresetcode/', {method: 'POST', body: JSON.stringify({resetcode: key})});
+    } catch {
+      return;
+    }
+  }
+
+  async changePassword(resetcode:string, password: string): Promise<Response | undefined> {
+    try {
+      return await fetch(URL + '/users/changepassword/', {method: 'POST', body: JSON.stringify({resetcode: resetcode, password: password})});
     } catch {
       return;
     }

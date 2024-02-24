@@ -30,9 +30,10 @@ export class ResetPasswordComponent {
   });
 
   key: string | null = this.route.snapshot.queryParamMap.get('key');
+  showFeedback: boolean = false;
 
   constructor(private validationService: ValidationService, private backendService: BackendServiceService, private router: Router, private route: ActivatedRoute) {
-    if(this.key === null) {
+    if (this.key === null) {
       this.show = 2;
     }
     this.checkKey();
@@ -49,14 +50,35 @@ export class ResetPasswordComponent {
   }
 
   async checkKey() {
-    if(this.key) {
+    if (this.key) {
       const resp = await this.backendService.checkKey(this.key);
-      if(resp?.ok) {
+      if (resp?.ok) {
         this.show = 1;
       } else {
         this.show = 2;
       }
     }
+  }
+
+  async changePassword() {
+    const password: string | null = this.password2.value
+    if (password && this.key && this.pwFormGroup.valid) {
+      const resp: Response | undefined = await this.backendService.changePassword(this.key, password);
+      this.pwFormGroup.reset();
+      this.userFeedback(!!(await resp?.ok));
+    }
+  }
+
+  userFeedback(ok: boolean) {
+    if(ok) {
+      this.router.navigate(['login']);
+    } else {
+      this.showFeedback = true;
+    }
+  }
+
+  hideFeedback(): void {
+    this.showFeedback = false;
   }
 
 }
