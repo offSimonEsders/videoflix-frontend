@@ -9,6 +9,7 @@ import {Router} from "@angular/router";
 import {FooterComponent} from "../footer/footer.component";
 import {HeaderComponent} from "../header/header.component";
 import {ValidationService} from "../../services/validation.service";
+import {BackendServiceService} from "../../services/backend-service.service";
 
 @Component({
   selector: 'app-start-page',
@@ -27,7 +28,13 @@ export class StartPageComponent{
   @ViewChild('emailinput') emailinput?: ElementRef<HTMLInputElement>;
   email: FormControl<string | null> = new FormControl('', [this.validation.validateEmail.bind(this), Validators.required]);
 
-  constructor(private router: Router, private validation: ValidationService) {
+  constructor(private router: Router, private validation: ValidationService, private backendservice: BackendServiceService) {
+    this.test();
+  }
+
+  async test () {
+    const resp = await this.backendservice.requestResetPassword()
+    console.log(await resp?.json());
   }
 
   /**

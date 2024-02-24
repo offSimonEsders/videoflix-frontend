@@ -101,4 +101,12 @@ export class BackendServiceService {
     }
   }
 
+  async requestResetPassword() {
+    try {
+      return await fetch(URL + '/users/requestresetpassword/', {method: 'POST', body: JSON.stringify({email: 'simonesders2003@gmail.com'}), mode:'cors'});
+    } catch {
+      return;
+    }
+  }
+
 }
