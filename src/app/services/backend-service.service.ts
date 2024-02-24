@@ -103,7 +103,18 @@ export class BackendServiceService {
 
   async requestResetPassword() {
     try {
-      return await fetch(URL + '/users/requestresetpassword/', {method: 'POST', body: JSON.stringify({email: 'simonesders2003@gmail.com'}), mode:'cors'});
+      return await fetch(URL + '/users/requestresetpassword/', {
+        method: 'POST',
+        body: JSON.stringify({email: 'simonesders2003@gmail.com'})
+      });
+    } catch {
+      return;
+    }
+  }
+
+  async checkKey(key: string) {
+    try {
+      return await fetch(URL + '/users/checkresetcode/', {method: 'POST', body: JSON.stringify({resetcode: key})});
     } catch {
       return;
     }

@@ -117,7 +117,6 @@ export class RegistrationComponent {
     if (username && email && password) {
       const newUser: Videoflixuser = new Videoflixuser(username, email, password);
       const resp: Response | undefined = await this.backendservice.register(newUser);
-      console.log(resp)
       if(resp?.ok) {
         this.userFeedback = 'Die Registrierung war erfolgreich. Verifiziere dich über die Email.';
         return;

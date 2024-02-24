@@ -28,13 +28,7 @@ export class StartPageComponent{
   @ViewChild('emailinput') emailinput?: ElementRef<HTMLInputElement>;
   email: FormControl<string | null> = new FormControl('', [this.validation.validateEmail.bind(this), Validators.required]);
 
-  constructor(private router: Router, private validation: ValidationService, private backendservice: BackendServiceService) {
-    this.test();
-  }
-
-  async test () {
-    const resp = await this.backendservice.requestResetPassword()
-    console.log(await resp?.json());
+  constructor(private router: Router, private validation: ValidationService) {
   }
 
   /**
