@@ -37,7 +37,6 @@ export class HomeComponent implements OnInit {
   async ngOnInit() {
     const resp: Response | undefined = await this.backendService.getContentData();
     this.videos = await resp?.json();
-    console.log(this.videos)
     this.getRandomBannerVideo();
   }
 

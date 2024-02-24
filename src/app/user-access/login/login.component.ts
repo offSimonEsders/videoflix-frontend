@@ -144,8 +144,12 @@ export class LoginComponent {
   }
 
   toggleShowResetPassword(): void {
-    console.log("test")
     this.showResetPassword = !this.showResetPassword;
+    if(this.showResetPassword) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
   }
 
 }

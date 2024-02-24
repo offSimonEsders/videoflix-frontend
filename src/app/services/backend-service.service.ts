@@ -101,11 +101,11 @@ export class BackendServiceService {
     }
   }
 
-  async requestResetPassword(): Promise<Response | undefined> {
+  async requestResetPassword(email: string): Promise<Response | undefined> {
     try {
       return await fetch(URL + '/users/requestresetpassword/', {
         method: 'POST',
-        body: JSON.stringify({email: 'simonesders2003@gmail.com'})
+        body: JSON.stringify({email: email})
       });
     } catch {
       return;

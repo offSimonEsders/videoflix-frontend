@@ -31,7 +31,6 @@ export class VideoElementComponent {
    * */
   sendVideoToPlay(event: Event): void {
     const eventTarget: HTMLElement = event.target as unknown as HTMLElement;
-    console.log(eventTarget.classList)
     if (!eventTarget.classList.contains('info-button')) {
       this.playVideo.emit(this.video);
     }
