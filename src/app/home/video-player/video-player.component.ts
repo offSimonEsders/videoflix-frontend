@@ -22,7 +22,6 @@ export class VideoPlayerComponent implements AfterViewInit {
   showSettings: boolean = false;
 
   constructor(private router: Router) {
-    this.changeToOriginal();
   }
 
   ngAfterViewInit() {

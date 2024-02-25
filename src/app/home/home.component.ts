@@ -34,6 +34,9 @@ export class HomeComponent implements OnInit {
   videoToPlay?: Video = undefined;
 
   constructor(private backendService: BackendServiceService, public router: Router) {
+    if(this.bannerVideo === undefined) {
+      this.router.navigate(['home']);
+    }
   }
 
   async ngOnInit() {
