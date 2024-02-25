@@ -5,6 +5,7 @@ import {HeaderComponent} from "../header/header.component";
 import {ValidationService} from "../../services/validation.service";
 import {BackendServiceService} from "../../services/backend-service.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {FooterComponent} from "../footer/footer.component";
 
 @Component({
   selector: 'app-reset-password',
@@ -14,7 +15,8 @@ import {ActivatedRoute, Router} from "@angular/router";
     NgIf,
     NgClass,
     ReactiveFormsModule,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   templateUrl: './reset-password.component.html',
   styleUrl: './reset-password.component.scss'
