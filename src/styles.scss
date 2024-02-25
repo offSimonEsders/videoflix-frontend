@@ -164,7 +164,8 @@ h1, h2, h3, p {
 
 .footer {
   position: absolute;
-  top: 100%;
+  bottom: 0;
+  transform: translateY(100%);
   width: 100%;
 }
 

@@ -9,6 +9,6 @@
       <app-video-element (playVideo)="setVideoToPlayAndOpenVideoplayer($event)" (videoToInfo)="setVideoInfo($event)"
                          *ngFor="let video of videos" [video]="video"></app-video-element>
     </div>
+    <app-footer class="footer"></app-footer>
   </div>
-  <app-footer class="footer" style="padding-top: 20px"></app-footer>
 </section>
