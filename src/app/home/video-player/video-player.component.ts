@@ -1,4 +1,4 @@
-import {Component, ElementRef, HostListener, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostListener, Input, ViewChild} from '@angular/core';
 import {Video} from "../models/video";
 import {environment} from "../../environments/environment";
 import {NgIf} from "@angular/common";
@@ -13,18 +13,20 @@ import {Router} from "@angular/router";
   templateUrl: './video-player.component.html',
   styleUrl: './video-player.component.scss'
 })
-export class VideoPlayerComponent implements OnInit {
+export class VideoPlayerComponent implements AfterViewInit {
   @Input() videoToPlay?: Video;
   @ViewChild('video') video?: ElementRef<HTMLVideoElement>;
   @ViewChild('actionbtns') actionbtns?: ElementRef<HTMLDivElement>;
   videoURL?: string;
   mouseTime: number = this.getMouseTime();
+  showSettings: boolean = false;
 
   constructor(private router: Router) {
+    this.changeToOriginal();
   }
 
-  ngOnInit() {
-    this.videoURL = environment.apiUrl + this.videoToPlay?.original_video + '/';
+  ngAfterViewInit() {
+    this.changeToOriginal()
   }
 
   /**
@@ -104,6 +106,42 @@ export class VideoPlayerComponent implements OnInit {
    * */
   backToHome() {
     this.router.navigate(['home']);
+  }
+
+  toggleSettings() {
+    this.showSettings = !this.showSettings;
+  }
+
+  hideSettings(event: Event) {
+    const eventElement = event.target as unknown as HTMLElement;
+    if(!eventElement.classList.contains('settings')) {
+      this.showSettings = false;
+    }
+  }
+
+  changeQuality(link: string) {
+    return environment.apiUrl + link + '/';
+  }
+
+  changeSRC(link: string | undefined) {
+    if(link && this.video) {
+      this.video.nativeElement.src = this.changeQuality(link);
+    }
+  }
+
+  changeToOriginal() {
+    const link: string | undefined = this.videoToPlay?.original_video;
+    this.changeSRC(link);
+  }
+
+  changeTo720() {
+    const link: string | undefined = this.videoToPlay?.video_720p;
+    this.changeSRC(link);
+  }
+
+  changeTo480() {
+    const link: string | undefined = this.videoToPlay?.video_480p;
+    this.changeSRC(link);
   }
 
   protected readonly clearTimeout = clearTimeout;
