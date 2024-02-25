@@ -8,6 +8,7 @@ import {NgForOf, NgIf} from "@angular/common";
 import {VideoElementComponent} from "./video-element/video-element.component";
 import {VideoPlayerComponent} from "./video-player/video-player.component";
 import {Router, RouterOutlet} from "@angular/router";
+import {FooterComponent} from "../user-access/footer/footer.component";
 
 @Component({
   selector: 'app-home',
@@ -20,7 +21,8 @@ import {Router, RouterOutlet} from "@angular/router";
     VideoElementComponent,
     NgForOf,
     VideoPlayerComponent,
-    RouterOutlet
+    RouterOutlet,
+    FooterComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

@@ -1,0 +1,11 @@
+div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 100dvw;
+  width: calc(100% - 20px);
+  height: calc(100dvh - 106px);
+  padding: 10px;
+  padding-top: 96px;
+  background-color: black;
+}

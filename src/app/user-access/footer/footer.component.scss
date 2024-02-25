@@ -15,8 +15,13 @@ footer {
   gap: 40px;
 
   a {
-
+    cursor: pointer;
     color: white;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
   }
 
 }

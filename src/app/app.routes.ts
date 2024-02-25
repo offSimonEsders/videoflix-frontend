@@ -7,6 +7,8 @@ import {AuthGuardService} from "./services/auth-guard.service";
 import {VerifyComponent} from "./user-access/verify/verify.component";
 import {VideoPlayerComponent} from "./home/video-player/video-player.component";
 import {ResetPasswordComponent} from "./user-access/reset-password/reset-password.component";
+import {ImprintComponent} from "./legal/imprint/imprint.component";
+import {DSGVOComponent} from "./legal/dsgvo/dsgvo.component";
 
 export const routes: Routes = [
   {path: '', component: StartPageComponent},
@@ -16,5 +18,7 @@ export const routes: Routes = [
       {path: 'videoplayer', component: VideoPlayerComponent}
     ]},
   {path: 'verify', component: VerifyComponent},
-  {path: 'resetpassword', component: ResetPasswordComponent}
+  {path: 'resetpassword', component: ResetPasswordComponent},
+  {path: 'imprint', component: ImprintComponent},
+  {path: 'DSGVO', component: DSGVOComponent}
 ];
