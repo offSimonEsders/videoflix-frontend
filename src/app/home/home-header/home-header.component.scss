@@ -3,6 +3,7 @@ header {
   flex-direction: row;
   position: sticky;
   align-items: center;
+  justify-content: space-between;
   z-index: 10;
   top: 0;
   padding: 10px 40px;
@@ -17,4 +18,26 @@ h1 {
   &:hover {
     text-shadow: #E50914FF 0 0 20px;
   }
+}
+
+button {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  width: 32px;
+  border: none;
+  border-radius: 90px;
+  background-color: rgb(255, 255, 255, 0.4);
+
+  &:hover {
+    scale: 1.1;
+    border: 1px solid red;
+  }
+
+  &:active {
+    scale: 1;
+  }
+
 }

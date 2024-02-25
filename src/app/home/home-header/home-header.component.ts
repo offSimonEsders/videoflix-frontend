@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {BackendServiceService} from "../../services/backend-service.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home-header',
@@ -8,5 +10,14 @@ import { Component } from '@angular/core';
   styleUrl: './home-header.component.scss'
 })
 export class HomeHeaderComponent {
+
+  constructor(private backendService: BackendServiceService, private router: Router) {
+  }
+
+  logout() {
+    this.backendService.logout();
+    localStorage.clear();
+    this.router.navigate([''])
+  }
 
 }
