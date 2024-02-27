@@ -23,3 +23,9 @@ video {
     font-size: 47px;
   }
 }
+
+@media (max-width: 350px) {
+  .extra-container {
+    left: 20px;
+  }
+}

@@ -17,6 +17,7 @@
   gap: 20px;
   top: 50%;
   left: 50%;
+  min-width: 30dvw;
   transform: translate(-50%, -50%);
   padding: 48px 68px;
   background-color: rgba(0, 0, 0, 0.7);
@@ -25,4 +26,23 @@
     font-size: 2rem;
   }
 
+  .standart-btn {
+    width: fit-content;
+  }
+
+}
+
+@media (max-width: 1000px) {
+  .verify-content {
+    min-width: 50dvw;
+  }
+}
+
+@media (max-width: 600px) {
+  .verify-content {
+    padding: 48px 38px;
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
 }
