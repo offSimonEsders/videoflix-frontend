@@ -9,6 +9,7 @@ import {VideoElementComponent} from "./video-element/video-element.component";
 import {VideoPlayerComponent} from "./video-player/video-player.component";
 import {Router, RouterOutlet} from "@angular/router";
 import {FooterComponent} from "../user-access/footer/footer.component";
+import {Serie} from "./models/serie";
 
 @Component({
   selector: 'app-home',
@@ -29,8 +30,9 @@ import {FooterComponent} from "../user-access/footer/footer.component";
 })
 export class HomeComponent implements OnInit {
   videos?: Video[];
+  series?: any;
   bannerVideo?: Video;
-  videoInfo?: Video = undefined;
+  videoInfo?: Video | Serie = undefined;
   videoToPlay?: Video = undefined;
 
   constructor(private backendService: BackendServiceService, public router: Router) {
@@ -40,9 +42,18 @@ export class HomeComponent implements OnInit {
   }
 
   async ngOnInit() {
-    const resp: Response | undefined = await this.backendService.getMovies();
-    this.videos = await resp?.json();
+    await this.getMedia();
     this.getRandomBannerVideo();
+  }
+
+  async getMedia() {
+    const resp: Response | undefined = await this.backendService.getSeriesAndMovies();
+    const data = await resp?.json();
+    if(data) {
+      this.videos = data['movies'];
+      this.series = data['series'];
+      console.log(data)
+    }
   }
 
   /**
@@ -66,7 +77,7 @@ export class HomeComponent implements OnInit {
     this.videoInfo = undefined;
   }
 
-  setVideoInfo(video: Video): void {
+  setVideoInfo(video: Video | Serie): void {
     this.videoInfo = video;
   }
 
@@ -74,6 +85,18 @@ export class HomeComponent implements OnInit {
     this.videoToPlay = video;
     this.videoInfo = undefined;
     this.router.navigate(['home/videoplayer']);
+  }
+
+  playFirstVideoOfSerie(element: Serie | Video): void {
+    if(element.hasOwnProperty('episodes')) {
+      const serie: Serie = element as Serie;
+      const firstVideo: Video = serie.episodes[0] as Video;
+      if(firstVideo) {
+        this.setVideoToPlayAndOpenVideoplayer(firstVideo);
+      }
+    } else {
+      this.setVideoToPlayAndOpenVideoplayer(element as Video);
+    }
   }
 
 }

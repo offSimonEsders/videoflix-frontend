@@ -8,6 +8,7 @@
     <div class="video-elements">
       <app-video-element (playVideo)="setVideoToPlayAndOpenVideoplayer($event)" (videoToInfo)="setVideoInfo($event)"
                          *ngFor="let video of videos" [video]="video"></app-video-element>
+      <app-video-element *ngFor="let serie of series" [video]="serie" (playVideo)="playFirstVideoOfSerie($event)" (videoToInfo)="setVideoInfo($event)"></app-video-element>
     </div>
     <app-footer class="footer"></app-footer>
   </div>

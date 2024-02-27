@@ -113,6 +113,18 @@ export class BackendServiceService {
     }
   }
 
+  /**
+   * Downloads all series and movie data and returns it
+   * */
+  async getSeriesAndMovies() {
+    const authtoken: string | null = localStorage.getItem('authtoken');
+    try {
+      return await fetch(URL + '/moviesandseries/', {method: 'GET', headers: {Authorization: `Token ${authtoken}`}});
+    } catch {
+      return;
+    }
+  }
+
   async requestResetPassword(email: string): Promise<Response | undefined> {
     try {
       return await fetch(URL + '/users/requestresetpassword/', {
