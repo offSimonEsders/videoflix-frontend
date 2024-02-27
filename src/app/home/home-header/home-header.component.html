@@ -1,14 +1,14 @@
 <header>
   <div class="head-nav">
     <h1 (click)="navigateHome()">Videoflix</h1>
-    <nav>
+    <nav (click)="toggleMenu()" #nav>
       <a (click)="navigateHome()">Startseite</a>
       <a (click)="navigateMovies()">Filme</a>
       <a (click)="navigateSeries()">Serien</a>
     </nav>
   </div>
   <div class="button-con">
-    <button class="burger-menu">
+    <button (click)="toggleMenu()" class="burger-menu">
       <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
         <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/>
       </svg>

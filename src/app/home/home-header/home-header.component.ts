@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ElementRef, HostListener, ViewChild} from '@angular/core';
 import {BackendServiceService} from "../../services/backend-service.service";
 import {Router} from "@angular/router";
 
@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
   styleUrl: './home-header.component.scss'
 })
 export class HomeHeaderComponent {
+  @ViewChild('nav') nav?: ElementRef;
 
   constructor(private backendService: BackendServiceService, private router: Router) {
   }
@@ -33,6 +34,25 @@ export class HomeHeaderComponent {
 
   navigateSeries(): void {
     this.router.navigate(['home/series']);
+  }
+
+  toggleMenu() {
+    if (this.nav) {
+      if (window.innerWidth <= 600) {
+        if (this.nav?.nativeElement.style.display === 'flex') {
+          this.nav.nativeElement.style.display = 'none';
+        } else {
+          this.nav.nativeElement.style.display = 'flex';
+        }
+      }
+    }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  showNav(): void {
+    if (this.nav && window.innerWidth > 600 && this.nav.nativeElement.style.display === 'none') {
+      this.nav.nativeElement.style.display = 'flex';
+    }
   }
 
 }
