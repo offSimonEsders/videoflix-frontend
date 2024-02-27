@@ -1,5 +1,5 @@
-<section class="video-player-frame" (click)="hideSettings($event)" (keydown.arrowLeft)="skipBackwards()" (keydown.arrowRight)="skipForwards()"
-         (mousemove)="mouseMoved()" (keydown.space)="video.play()">
+<section class="video-player-frame" (click)="hideSettings($event)"
+         (mousemove)="mouseMoved()">
   <video #video></video>
   <div class="action-btns" #actionbtns>
     <button (click)="backToHome()" class="home">
