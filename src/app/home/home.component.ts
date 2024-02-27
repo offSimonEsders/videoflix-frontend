@@ -50,8 +50,8 @@ export class HomeComponent implements OnInit {
    * */
   getRandomBannerVideo(): void {
     if(this.videos) {
-      const index: number = Math.round(this.videos.length * Math.random());
-      if(index <= this.videos.length - 1) {
+      const index: number = Math.round((this.videos.length - 1) * Math.random());
+      if(index) {
         this.bannerVideo = this.videos[index];
       } else {
         this.bannerVideo = this.videos[0];
