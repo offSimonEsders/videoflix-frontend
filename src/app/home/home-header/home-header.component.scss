@@ -20,6 +20,33 @@ h1 {
   }
 }
 
+.head-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  nav {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+
+    a {
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &:active {
+        color: var(--red);
+      }
+
+    }
+
+  }
+
+}
+
 button {
   cursor: pointer;
   display: flex;

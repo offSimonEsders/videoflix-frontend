@@ -20,4 +20,16 @@ export class HomeHeaderComponent {
     this.router.navigate([''])
   }
 
+  navigateHome(): void {
+    this.router.navigate(['home']);
+  }
+
+  navigateMovies(): void {
+    this.router.navigate(['home/movies']);
+  }
+
+  navigateSeries(): void {
+    this.router.navigate(['home/series']);
+  }
+
 }

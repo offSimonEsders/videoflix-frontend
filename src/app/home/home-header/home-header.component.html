@@ -1,5 +1,12 @@
 <header>
-  <h1>Videoflix</h1>
+  <div class="head-nav">
+    <h1 (click)="navigateHome()">Videoflix</h1>
+    <nav>
+      <a (click)="navigateHome()">Startseite</a>
+      <a (click)="navigateMovies()">Filme</a>
+      <a (click)="navigateSeries()">Serien</a>
+    </nav>
+  </div>
   <button (click)="logout()" class="logout">
     <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
       <path

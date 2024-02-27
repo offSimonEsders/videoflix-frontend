@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Video} from "../models/video";
 import {NgStyle} from "@angular/common";
 import {environment} from "../../environments/environment";
