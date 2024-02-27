@@ -28,3 +28,15 @@ header {
 
   }
 }
+
+@media (max-width: 400px) {
+  .header-content {
+    flex-direction: column;
+    gap: 30px;
+
+    .standart-btn {
+      width: 166px;
+    }
+
+  }
+}

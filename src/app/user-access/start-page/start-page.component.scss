@@ -97,6 +97,12 @@
     .standart-inputcon {
       max-width: 300px;
       width: 100%;
+
+      .error-message {
+        position: static;
+        transform: translateY(0%);
+      }
+
     }
 
     .btn-big {
