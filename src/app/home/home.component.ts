@@ -49,7 +49,10 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  async loadData() {
+  /**
+   * Downloads the data from the server specific on the url
+   * */
+  async loadData(): Promise<void> {
     if (this.router.url === '/home/movies') {
       await this.loadMovies();
     } else if (this.router.url === '/home/series') {
@@ -60,13 +63,19 @@ export class HomeComponent implements OnInit {
     this.getRandomBannerVideo();
   }
 
-  checkIfVideoToPlay() {
+  /**
+   * Checks if a video is playing. Else it sends the client to the home
+   * */
+  checkIfVideoToPlay(): void {
     if (this.bannerVideo === undefined && this.router.url === '/home/videoplayer') {
       this.router.navigate(['home']);
     }
   }
 
-  async getMedia() {
+  /**
+   * Downloads the movie and series data from the server. Turns it to a json and gives it to the variables
+   * */
+  async getMedia(): Promise<void> {
     const resp: Response | undefined = await this.backendService.getSeriesAndMovies();
     const data = await resp?.json();
     if (data) {
@@ -75,14 +84,20 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  async loadMovies() {
+  /**
+   * Sets the series to undefined and loads the movie data from the server.
+   * */
+  async loadMovies(): Promise<void> {
     this.series = undefined;
     const resp: Response | undefined = await this.backendService.getMovies();
     this.videos = await resp?.json();
     console.log(this.series)
   }
 
-  async loadSeries() {
+  /**
+   * Sets the movie to undefined and loads the series data from the server.
+   * */
+  async loadSeries(): Promise<void> {
     this.videos = undefined;
     const resp: Response | undefined = await this.backendService.getSeries();
     this.series = await resp?.json();
@@ -101,6 +116,9 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  /**
+   * Adds all videos to the videoList
+   * */
   addVideosToList(videoList: Video[]): void {
     if (this.videos) {
       for (let video of this.videos) {
@@ -109,6 +127,9 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  /**
+   * Adds the first video of every series to the videoList
+   * */
   addSeriesToList(videoList: Video[]): void {
     if (this.series) {
       for (let video of this.series) {
@@ -124,16 +145,27 @@ export class HomeComponent implements OnInit {
     this.videoInfo = undefined;
   }
 
+  /**
+   * Sets the given video to videoInfo so it can be displayed on the screen
+   *
+   * @param video
+   * */
   setVideoInfo(video: Video | Serie): void {
     this.videoInfo = video;
   }
 
+  /**
+   * Sets a video to. Closes the videoInfo and loads the videoplayer
+   * */
   setVideoToPlayAndOpenVideoplayer(video: Video): void {
     this.videoToPlay = video;
     this.videoInfo = undefined;
     this.router.navigate(['home/videoplayer']);
   }
 
+  /**
+   * Sets the first video of a serie to the videoplayer. If it is not a serie it will be played by the videoplayer
+   * */
   playFirstVideoOfSerie(element: Serie | Video): void {
     if (element.hasOwnProperty('episodes')) {
       const serie: Serie = element as Serie;
