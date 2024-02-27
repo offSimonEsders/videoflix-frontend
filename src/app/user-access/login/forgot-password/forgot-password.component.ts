@@ -32,7 +32,6 @@ export class ForgotPasswordComponent {
     const email: string | null = this.email.value;
     if(email && this.email.valid) {
       const resp = await this.backendService.requestResetPassword(email);
-      console.log(resp)
       this.closeEvent.emit(true);
     } else {
       this.emailinput?.nativeElement.focus();

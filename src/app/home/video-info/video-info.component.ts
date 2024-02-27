@@ -26,7 +26,6 @@ export class VideoInfoComponent implements OnInit{
   protected readonly NaN = NaN;
 
   ngOnInit() {
-    console.log(this.video)
     if(this.video?.hasOwnProperty('episodes')) {
       this.serie = this.video as Serie;
     }

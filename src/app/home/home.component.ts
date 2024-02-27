@@ -7,9 +7,11 @@ import {VideoInfoComponent} from "./video-info/video-info.component";
 import {NgForOf, NgIf} from "@angular/common";
 import {VideoElementComponent} from "./video-element/video-element.component";
 import {VideoPlayerComponent} from "./video-player/video-player.component";
-import {Router, RouterOutlet} from "@angular/router";
+import {NavigationEnd, Router, RouterOutlet} from "@angular/router";
 import {FooterComponent} from "../user-access/footer/footer.component";
 import {Serie} from "./models/serie";
+import {filter} from "rxjs/operators";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-home',
@@ -37,11 +39,14 @@ export class HomeComponent implements OnInit {
 
   constructor(private backendService: BackendServiceService, public router: Router) {
     this.checkIfVideoToPlay();
-    this.router.events.subscribe((event) => this.loadData());
   }
 
   ngOnInit() {
     this.loadData();
+    const events: Observable<any> = this.router.events.pipe(filter(event => event instanceof NavigationEnd));
+    events.subscribe((): void => {
+      this.loadData();
+    })
   }
 
   async loadData() {
@@ -71,14 +76,15 @@ export class HomeComponent implements OnInit {
   }
 
   async loadMovies() {
+    this.series = undefined;
     const resp: Response | undefined = await this.backendService.getMovies();
     this.videos = await resp?.json();
-    this.series = undefined;
+    console.log(this.series)
   }
 
   async loadSeries() {
-    const resp: Response | undefined = await this.backendService.getSeries();
     this.videos = undefined;
+    const resp: Response | undefined = await this.backendService.getSeries();
     this.series = await resp?.json();
   }
 
@@ -97,14 +103,14 @@ export class HomeComponent implements OnInit {
 
   addVideosToList(videoList: Video[]): void {
     if (this.videos) {
-      for(let video of this.videos) {
+      for (let video of this.videos) {
         videoList.push(video);
       }
     }
   }
 
   addSeriesToList(videoList: Video[]): void {
-    if(this.series) {
+    if (this.series) {
       for (let video of this.series) {
         videoList.push(video.episodes[0]);
       }
