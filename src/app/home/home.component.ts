@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
   }
 
   async ngOnInit() {
-    const resp: Response | undefined = await this.backendService.getContentData();
+    const resp: Response | undefined = await this.backendService.getMovies();
     this.videos = await resp?.json();
     this.getRandomBannerVideo();
   }
@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
   getRandomBannerVideo(): void {
     if(this.videos) {
       const index: number = Math.round(this.videos.length * Math.random());
-      if(index) {
+      if(index <= this.videos.length - 1) {
         this.bannerVideo = this.videos[index];
       } else {
         this.bannerVideo = this.videos[0];

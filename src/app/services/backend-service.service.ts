@@ -90,12 +90,24 @@ export class BackendServiceService {
   }
 
   /**
-   * Downloads the all videoinfo and returns it
+   * Downloads all movie data and returns it
    * */
-  async getContentData(): Promise<Response | undefined> {
+  async getMovies(): Promise<Response | undefined> {
     const authtoken: string | null = localStorage.getItem('authtoken');
     try {
-      return await fetch(URL + '/video/', {method: 'GET', headers: {Authorization: `Token ${authtoken}`}});
+      return await fetch(URL + '/movies/', {method: 'GET', headers: {Authorization: `Token ${authtoken}`}});
+    } catch {
+      return;
+    }
+  }
+
+  /**
+   * Downloads all series data and returns it
+   * */
+  async getSeries() {
+    const authtoken: string | null = localStorage.getItem('authtoken');
+    try {
+      return await fetch(URL + '/series/', {method: 'GET', headers: {Authorization: `Token ${authtoken}`}});
     } catch {
       return;
     }
