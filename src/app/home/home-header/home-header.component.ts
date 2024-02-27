@@ -14,6 +14,9 @@ export class HomeHeaderComponent {
   constructor(private backendService: BackendServiceService, private router: Router) {
   }
 
+  /**
+   * Sends the authkey to the backend so the session can be ended
+   * */
   logout() {
     this.backendService.logout();
     localStorage.clear();

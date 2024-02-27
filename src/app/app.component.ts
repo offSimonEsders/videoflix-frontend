@@ -12,6 +12,9 @@ import {Router, RouterOutlet} from '@angular/router';
 export class AppComponent {
   title = 'videoflix-frontend';
 
+  /**
+   * If the client sets rememberme to true he will be automatically send to the home on loading the website
+   * */
   constructor(private router: Router) {
     const item: string | null = localStorage.getItem('rememberme');
     if (item === 'true') {

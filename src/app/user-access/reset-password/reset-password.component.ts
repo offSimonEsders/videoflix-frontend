@@ -41,6 +41,9 @@ export class ResetPasswordComponent {
     this.checkKey();
   }
 
+  /**
+   * Depending on the error the password2 has it returns a text for the client
+   * */
   getErrorMessagePassword() {
     if (this.password2.hasError('minlength')) {
       return 'Dein Passwort sollte mindestens 8 Zeichen lang sein';
@@ -51,9 +54,12 @@ export class ResetPasswordComponent {
     return;
   }
 
-  async checkKey() {
+  /**
+   * Sends the authkey to the backend and checks if the key exists
+   * */
+  async checkKey(): Promise<void> {
     if (this.key) {
-      const resp = await this.backendService.checkKey(this.key);
+      const resp: Response | undefined = await this.backendService.checkKey(this.key);
       if (resp?.ok) {
         this.show = 1;
       } else {
@@ -62,7 +68,10 @@ export class ResetPasswordComponent {
     }
   }
 
-  async changePassword() {
+  /**
+   * Sends the new password to the backend and resets the form
+   * */
+  async changePassword(): Promise<void> {
     const password: string | null = this.password2.value
     if (password && this.key && this.pwFormGroup.valid) {
       const resp: Response | undefined = await this.backendService.changePassword(this.key, password);
@@ -71,6 +80,9 @@ export class ResetPasswordComponent {
     }
   }
 
+  /**
+   * When ok is true it sends the client to the login. Else it shows him an errormessage
+   * */
   userFeedback(ok: boolean) {
     if(ok) {
       this.router.navigate(['login']);
