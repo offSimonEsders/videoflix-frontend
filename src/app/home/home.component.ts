@@ -91,7 +91,6 @@ export class HomeComponent implements OnInit {
     this.series = undefined;
     const resp: Response | undefined = await this.backendService.getMovies();
     this.videos = await resp?.json();
-    console.log(this.series)
   }
 
   /**
