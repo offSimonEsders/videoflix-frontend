@@ -4,7 +4,7 @@ import {BannerComponent} from "./banner/banner.component";
 import {BackendServiceService} from "../services/backend-service.service";
 import {Video} from "./models/video";
 import {VideoInfoComponent} from "./video-info/video-info.component";
-import {NgForOf, NgIf} from "@angular/common";
+import {NgForOf, NgIf, NgStyle} from "@angular/common";
 import {VideoElementComponent} from "./video-element/video-element.component";
 import {VideoPlayerComponent} from "./video-player/video-player.component";
 import {NavigationEnd, Router, RouterOutlet} from "@angular/router";
@@ -25,7 +25,8 @@ import {Observable} from "rxjs";
     NgForOf,
     VideoPlayerComponent,
     RouterOutlet,
-    FooterComponent
+    FooterComponent,
+    NgStyle
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -36,6 +37,7 @@ export class HomeComponent implements OnInit {
   bannerVideo?: Video;
   videoInfo?: Video | Serie = undefined;
   videoToPlay?: Video = undefined;
+  noScroll: boolean = false;
 
   constructor(private backendService: BackendServiceService, public router: Router) {
     this.checkIfVideoToPlay();
@@ -47,6 +49,16 @@ export class HomeComponent implements OnInit {
     events.subscribe((): void => {
       this.loadData();
     })
+  }
+
+  toggleNoScroll() {
+    this.noScroll = !this.noScroll;
+    if(this.noScroll) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    console.log(this.noScroll)
   }
 
   /**
@@ -151,6 +163,7 @@ export class HomeComponent implements OnInit {
    * */
   setVideoInfo(video: Video | Serie): void {
     this.videoInfo = video;
+    this.toggleNoScroll()
   }
 
   /**

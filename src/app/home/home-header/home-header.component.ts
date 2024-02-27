@@ -1,4 +1,4 @@
-import {Component, ElementRef, HostListener, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, HostListener, Output, ViewChild} from '@angular/core';
 import {BackendServiceService} from "../../services/backend-service.service";
 import {Router} from "@angular/router";
 
@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
 })
 export class HomeHeaderComponent {
   @ViewChild('nav') nav?: ElementRef;
-
+  @Output() toggleScroll: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor(private backendService: BackendServiceService, private router: Router) {
   }
 
@@ -41,8 +41,10 @@ export class HomeHeaderComponent {
       if (window.innerWidth <= 600) {
         if (this.nav?.nativeElement.style.display === 'flex') {
           this.nav.nativeElement.style.display = 'none';
+          this.toggleScroll.emit(true);
         } else {
           this.nav.nativeElement.style.display = 'flex';
+          this.toggleScroll.emit(true);
         }
       }
     }
@@ -52,6 +54,11 @@ export class HomeHeaderComponent {
   showNav(): void {
     if (this.nav && window.innerWidth > 600 && this.nav.nativeElement.style.display === 'none') {
       this.nav.nativeElement.style.display = 'flex';
+    } else if(this.nav && window.innerWidth < 600 && this.nav.nativeElement.style.display === 'flex') {
+      this.nav.nativeElement.style.display = 'none';
+    }
+    if(this.nav?.nativeElement.style.display === 'none' && document.body.style.overflow === 'hidden') {
+      this.toggleScroll.emit(true);
     }
   }
 
