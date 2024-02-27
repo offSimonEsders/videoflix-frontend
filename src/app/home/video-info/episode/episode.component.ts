@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Video} from "../../models/video";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-episode',
@@ -8,5 +10,14 @@ import { Component } from '@angular/core';
   styleUrl: './episode.component.scss'
 })
 export class EpisodeComponent {
+  @Input() episode?: Video;
+  URL = environment.apiUrl;
+
+  getThumbnailUrl() {
+    if(this.episode) {
+      return this.URL + this.episode.thumbnail + '/';
+    }
+    return;
+  }
 
 }

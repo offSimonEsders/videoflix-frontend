@@ -15,11 +15,13 @@
 
 .info-content {
   position: absolute;
+  overflow: hidden;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   max-width: 900px;
   width: 90dvw;
+  max-height: 90dvh;
   height: fit-content;
   border-radius: 8px;
   background: #181818;
@@ -89,5 +91,14 @@
 }
 
 .description-con {
+  padding: 20px 50px;
+}
+
+.episodes-con {
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  max-height: 30dvh;
+  gap: 20px;
   padding: 20px 50px;
 }

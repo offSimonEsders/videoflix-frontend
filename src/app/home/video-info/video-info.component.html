@@ -24,7 +24,9 @@
     </div>
     <div class="description-con">
       <p>{{ video?.description }}</p>
-      <p></p>
     </div>
+    <section class="episodes-con" *ngIf="serie">
+      <app-episode *ngFor="let episode of serie?.episodes" [episode]="episode"></app-episode>
+    </section>
   </div>
 </section>
