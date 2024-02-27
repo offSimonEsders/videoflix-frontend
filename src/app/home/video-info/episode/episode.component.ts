@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Video} from "../../models/video";
 import {environment} from "../../../environments/environment";
 
@@ -11,7 +11,8 @@ import {environment} from "../../../environments/environment";
 })
 export class EpisodeComponent {
   @Input() episode?: Video;
-  URL = environment.apiUrl;
+  @Output() play: EventEmitter<boolean> = new EventEmitter<boolean>();
+  URL: string = environment.apiUrl;
 
   getThumbnailUrl() {
     if(this.episode) {
