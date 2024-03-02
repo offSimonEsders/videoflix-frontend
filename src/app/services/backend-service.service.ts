@@ -138,7 +138,7 @@ export class BackendServiceService {
 
   async checkKey(key: string): Promise<Response | undefined> {
     try {
-      return await fetch(URL + '/users/checkresetcode/', {method: 'POST', body: JSON.stringify({resetcode: key})});
+      return await fetch(URL + '/users/checkresetcode/', {method: 'POST', body: JSON.stringify({token: key})});
     } catch {
       return;
     }
