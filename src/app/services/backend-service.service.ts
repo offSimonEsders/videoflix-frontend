@@ -146,7 +146,7 @@ export class BackendServiceService {
 
   async changePassword(resetcode:string, password: string): Promise<Response | undefined> {
     try {
-      return await fetch(URL + '/users/changepassword/', {method: 'POST', body: JSON.stringify({resetcode: resetcode, password: password})});
+      return await fetch(URL + '/users/changepassword/', {method: 'POST', body: JSON.stringify({token: resetcode, password: password})});
     } catch {
       return;
     }
