@@ -29,6 +29,7 @@ export class VideoInfoComponent implements OnInit{
     if(this.video?.hasOwnProperty('episodes')) {
       this.serie = this.video as Serie;
     }
+    console.log(this.video?.hasOwnProperty('episodes'))
   }
 
   /**
@@ -49,10 +50,11 @@ export class VideoInfoComponent implements OnInit{
    * Emits video to the player
    * */
   playVideo(): void {
-    if(this.video instanceof Video) {
-      this.play.emit(this.video);
+    if(!this.video?.hasOwnProperty('episodes')) {
+      this.play.emit(this.video as Video);
     } else {
-      this.play.emit(this.video?.episodes[0]);
+      const serie: Serie = this.video as Serie;
+      this.play.emit(serie.episodes[0]);
     }
   }
 
