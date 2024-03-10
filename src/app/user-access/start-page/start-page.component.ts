@@ -26,7 +26,7 @@ import {BackendServiceService} from "../../services/backend-service.service";
 })
 export class StartPageComponent{
   @ViewChild('emailinput') emailinput?: ElementRef<HTMLInputElement>;
-  email: FormControl<string | null> = new FormControl('', [this.validation.validateEmail.bind(this), Validators.required]);
+  email: FormControl<string | null> = new FormControl('', [Validators.email, Validators.required]);
 
   constructor(private router: Router, private validation: ValidationService) {
   }

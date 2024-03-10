@@ -26,7 +26,7 @@ export class LoginComponent {
   showFeedback: boolean = false;
   showResetPassword: boolean = false;
   remember: boolean = false;
-  email: FormControl<string | null> = new FormControl('', [Validators.required, this.validation.validateEmail.bind(this)]);
+  email: FormControl<string | null> = new FormControl('', [Validators.required, Validators.email]);
   password: FormControl<string | null> = new FormControl('', [Validators.minLength(8), Validators.required]);
 
   loginGroup = new FormGroup({
@@ -45,16 +45,8 @@ export class LoginComponent {
     this.setRememberme(this.remember)
   }
 
-  /**
-   * Validates the result of the validated formcontrol and returns an errormessage for Email
-   *
-   * @returns {string | undefined}
-   * */
   getErrorMessageEmail() {
-    if (this.email.hasError('check')) {
-      return 'Bitte geben Sie eine gültige Email-Adresse ein';
-    }
-    return;
+    this.validation.getErrorMessageEmail(this.email);
   }
 
   /**

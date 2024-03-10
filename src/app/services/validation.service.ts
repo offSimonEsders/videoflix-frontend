@@ -48,7 +48,7 @@ export class ValidationService {
    * @returns {string | undefined}
    * */
   getErrorMessageEmail(control: FormControl) {
-    if (control.hasError('check')) {
+    if (control.hasError('email')) {
       return 'Bitte geben Sie eine gültige Email-Adresse ein';
     }
     return;

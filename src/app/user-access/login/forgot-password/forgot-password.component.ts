@@ -19,7 +19,7 @@ import {BackendServiceService} from "../../../services/backend-service.service";
 export class ForgotPasswordComponent {
   @ViewChild('emailinput') emailinput?: ElementRef;
   @Output() closeEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
-  email: FormControl<string | null> = new FormControl('', [Validators.required, this.validation.validateEmail.bind(this)]);
+  email: FormControl<string | null> = new FormControl('', [Validators.required, Validators.email]);
 
   constructor(private validation: ValidationService, private backendService: BackendServiceService) {
   }

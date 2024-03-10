@@ -25,7 +25,7 @@ export class RegistrationComponent {
   @ViewChild('registrationform') registrationform?: ElementRef;
   userFeedback: string | undefined = undefined;
   username: FormControl<string | null> = new FormControl('', [Validators.minLength(6), Validators.required])
-  email: FormControl<string | null> = new FormControl('', [Validators.required, this.validation.validateEmail.bind(this)]);
+  email: FormControl<string | null> = new FormControl('', [Validators.required, Validators.email]);
   password1: FormControl<string | null> = new FormControl('', [Validators.required, Validators.minLength(8)]);
   password2: FormControl<string | null> = new FormControl('', [Validators.required, Validators.minLength(8), this.validation.validatePasswords.bind(this, this.password1)]);
 
